@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saint y Diana</title>
+    <link rel="icon" href="img/iconPerry.png" type="image/png">
+
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <!-- SweetAlert2 para Alertas Bonitas (Mejora UX) -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body class="bg-white text-gray-900 font-body antialiased overflow-x-hidden">
+
+    <!-- HERO SECTION -->
+    <header class="relative h-screen w-full overflow-hidden flex items-center justify-center bg-black">
+        <div class="absolute inset-0 z-0">
+            <img src="img/guanabanasFacheros.jpg" alt="Pareja" class="w-full h-full object-cover opacity-60">
+            <div class="absolute inset-0 bg-black/40"></div>
+        </div>
+
+        <div class="relative z-10 text-white text-center flex flex-col items-center justify-center p-4">
+            <div class="flex items-center justify-center gap-4 md:gap-8 mb-4">
+                <span class="font-title text-8xl md:text-9xl animate-s inline-block">S</span>
+                <span class="font-script text-4xl md:text-6xl text-gray-300 mt-4">&</span>
+                <span class="font-title text-8xl md:text-9xl animate-d inline-block">D</span>
+            </div>
+
+            <div class="h-1 bg-white mb-6 animate-line"></div>
+
+            <p class="font-title text-xl md:text-2xl tracking-[0.2em] uppercase animate-hero-text animation-delay-500">
+                Saint & Diana
+            </p>
+            <p class="mt-4 font-body font-light text-sm tracking-widest animate-hero-text">
+                23 . 02 . 2026
+            </p>
+        </div>
+
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-white animate-bounce cursor-pointer"
+            onclick="document.getElementById('intro').scrollIntoView()">
+            <i class="fa-solid fa-chevron-down text-2xl"></i>
+        </div>
+    </header>
+    <!-- MENÚ DE NAVEGACIÓN STICKY -->
+    <nav class="py-4 bg-black text-white sticky top-0 z-50 shadow-xl transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-around items-center max-w-2xl mx-auto">
+                <a href="/nuestraHistoria" class="flex flex-col items-center group hover:text-gray-300 transition">
+                    <i class="fa-regular fa-heart text-xl md:text-2xl mb-1"></i>
+                    <span class="text-[10px] md:text-xs uppercase tracking-widest">Historia</span>
+                </a>
+                <a href="/confirmarAsistencia" class="flex flex-col items-center group hover:text-gray-300 transition">
+                    <i class="fa-solid fa-check text-xl md:text-2xl mb-1"></i>
+                    <span class="text-[10px] md:text-xs uppercase tracking-widest">Asistencia</span>
+                </a>
+                <a href="/ubicacion" class="flex flex-col items-center group hover:text-gray-300 transition">
+                    <i class="fa-solid fa-location-dot text-xl md:text-2xl mb-1"></i>
+                    <span class="text-[10px] md:text-xs uppercase tracking-widest">Mapa</span>
+                </a>
+                <a href="/regalos" class="flex flex-col items-center group hover:text-gray-300 transition">
+                    <i class="fa-solid fa-gift text-xl md:text-2xl mb-1"></i>
+                    <span class="text-[10px] md:text-xs uppercase tracking-widest">Regalos</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+    <!-- INTRODUCCIÓN -->
+    <section id="intro" class="py-20 px-6 max-w-4xl mx-auto text-center reveal-on-scroll">
+        <p class="font-script text-4xl text-gray-500 mb-6">Nos casamos</p>
+        <h2 class="font-title text-3xl md:text-4xl mb-8 leading-relaxed">
+            Con la bendición de Jehová y el amor de nuestros corazones.
+        </h2>
+        <div class="bg-gray-100 p-8 rounded-lg shadow-sm border-l-4 border-black inline-block">
+            <p class="italic text-gray-700 text-lg font-light">
+                "Y una cuerda triple* no se rompe fácilmente."
+            </p>
+            <p class="mt-2 font-bold text-sm uppercase tracking-wide">- Eclesiastés 4:12</p>
+        </div>
+        <p class="mt-10 text-gray-600 leading-7">
+            Queremos compartir este momento tan especial con las personas que amamos.
+            Acompáñanos a celebrar nuestra unión.
+        </p>
+    </section>
+
+
+
+    <!-- FOOTER -->
+    <!-- <footer class="relative h-[50vh] bg-gray-100 flex items-end justify-center">
+        <img src="img/guanabanasFacheros.jpg" alt="Final"
+            class="absolute inset-0 w-full h-full object-cover grayscale opacity-80">
+        <div class="relative z-10 text-center pb-16 px-4">
+            <h2 class="font-script text-6xl text-white drop-shadow-lg mb-4">Gracias</h2>
+        </div>
+    </footer> -->
+
+    <footer class="bg-black text-white py-8 text-center">
+        <p class="font-title text-sm tracking-widest">Saint & Diana</p>
+        <p class="font-title text-sm tracking-widest">23 . 02 . 2026</p>
+        <p class="text-[10px] text-gray-500 mt-2">By Jhordanex 🐼</p>
+    </footer>
+    <script src="app.js"></script>
+</body>
+
+</html>

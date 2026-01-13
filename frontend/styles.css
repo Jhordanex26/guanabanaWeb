@@ -1,0 +1,143 @@
+  /* Tipografías Personalizadas */
+  .font-title {
+    font-family: 'Cinzel', serif;
+  }
+
+  .font-script {
+    font-family: 'Great Vibes', cursive;
+  }
+
+  .font-body {
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  /* Animaciones Personalizadas */
+  @keyframes fadeInScale {
+    0% {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes slideInLeft {
+    0% {
+      opacity: 0;
+      transform: translateX(-50px);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slideInRight {
+    0% {
+      opacity: 0;
+      transform: translateX(50px);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes drawLine {
+    0% {
+      width: 0;
+    }
+
+    100% {
+      width: 100px;
+    }
+  }
+
+  .animate-hero-text {
+    animation: fadeInScale 2s ease-out forwards;
+  }
+
+  .animate-s {
+    animation: slideInLeft 1.5s ease-out forwards;
+  }
+
+  .animate-d {
+    animation: slideInRight 1.5s ease-out forwards;
+  }
+
+  .animate-line {
+    animation: drawLine 1.5s ease-out forwards 1s;
+  }
+
+  /* Utilidades de Scroll */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Ocultar elementos para animación al scroll */
+  .reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 1s ease-out;
+  }
+
+  .reveal-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Estilo personalizado para inputs */
+  .custom-input {
+    border-bottom: 1px solid black;
+    transition: border-color 0.3s;
+  }
+
+  .custom-input:focus {
+    outline: none;
+    border-bottom: 2px solid black;
+  }
+
+  /* --- NUEVOS ESTILOS UX/UI PARA REGALOS --- */
+  .gift-card {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid #f3f4f6;
+  }
+
+  .gift-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    border-color: #000;
+  }
+
+  .copy-btn {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .copy-btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: 0.5s;
+  }
+
+  .copy-btn:hover::after {
+    left: 100%;
+  }
+
+  /* Patrón de fondo sutil */
+  .bg-pattern {
+    background-color: #ffffff;
+    background-image: radial-gradient(#e5e7eb 1px, transparent 1px);
+    background-size: 20px 20px;
+  }

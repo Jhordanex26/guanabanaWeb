@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmar Asistencia</title>
+    <link rel="icon" href="img/iconPerry.png" type="image/png">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <!-- SweetAlert2 para Alertas Bonitas (Mejora UX) -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body class="bg-white text-gray-900 font-body antialiased overflow-x-hidden">
+
+    <section id="asistencia" class="py-24 bg-white reveal-on-scroll scroll-mt-24">
+        <div class="max-w-xl mx-auto px-6 text-center">
+            <div class="mb-6 text-4xl">
+                <i class="fa-solid fa-envelope-open-text text-gray-800"></i>
+            </div>
+            <h3 class="font-title text-3xl mb-2">Confirma tu Asistencia</h3>
+            <p class="text-gray-500 mb-8 text-sm">Por favor, confirma antes del 1 de Febrero.</p>
+
+            <!-- FORMULARIO CONECTADO A NODE.JS -->
+            <form id="rsvpForm" class="space-y-6 text-left">
+                <!-- Campo Nombre -->
+                <div>
+                    <label for="nombre" class="block text-xs uppercase tracking-wide text-gray-500 mb-1">Nombre
+                        Completo</label>
+                    <input type="text" id="nombre" name="nombre" placeholder="Tu nombre y apellido"
+                        class="w-full py-2 bg-transparent custom-input" required minlength="3">
+                </div>
+
+                <!-- Campo Invitados -->
+                <div>
+                    <label for="invitados" class="block text-xs uppercase tracking-wide text-gray-500 mb-1">Número de
+                        Invitados</label>
+                    <select id="invitados" name="invitados" class="w-full py-2 bg-transparent custom-input" required>
+                        <option value="" disabled selected>Selecciona una opción</option>
+                        <option value="1">1 Persona</option>
+                        <option value="2">2 Personas</option>
+                        <option value="3">3 Personas (Familia)</option>
+                    </select>
+                </div>
+
+                <!-- Campo Teléfono -->
+                <div>
+                    <label for="telefono" class="block text-xs uppercase tracking-wide text-gray-500 mb-1">Teléfono /
+                        WhatsApp</label>
+                    <input type="tel" id="telefono" name="telefono" placeholder="Ej: 987 654 321"
+                        class="w-full py-2 bg-transparent custom-input">
+                </div>
+
+                <!-- Campo Mensaje -->
+                <div>
+                    <label for="mensaje" class="block text-xs uppercase tracking-wide text-gray-500 mb-1">Mensaje
+                        (Opcional)</label>
+                    <textarea id="mensaje" name="mensaje" rows="2" placeholder="Déjanos tus buenos deseos..."
+                        class="w-full py-2 bg-transparent custom-input resize-none"></textarea>
+                </div>
+
+                <button type="submit" id="submitBtn"
+                    class="w-full bg-black text-white py-4 font-bold tracking-widest hover:bg-gray-800 transition duration-300 uppercase text-xs flex justify-center items-center gap-2">
+                    <span>Enviar Confirmación</span>
+                    <i class="fa-regular fa-paper-plane"></i>
+                </button>
+            </form>
+        </div>
+    </section>
+    <script src="app.js"></script>
+
+</body>
+
+</html>

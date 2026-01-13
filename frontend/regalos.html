@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regalos</title>
+    <link rel="icon" href="img/iconPerry.png" type="image/png">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <!-- SweetAlert2 para Alertas Bonitas (Mejora UX) -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body class="bg-white text-gray-900 font-body antialiased overflow-x-hidden flex flex-col min-h-screen">
+    <header class="py-16 md:py-24 bg-gray-50 text-center relative overflow-hidden">
+        <!-- Decoración de fondo -->
+        <div class="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none">
+            <i class="fa-solid fa-heart absolute top-10 left-10 text-6xl"></i>
+            <i class="fa-solid fa-gift absolute bottom-10 right-10 text-8xl"></i>
+        </div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <span class="font-script text-4xl md:text-5xl text-gray-400 mb-2 block reveal-on-scroll">Mesa de
+                Regalos</span>
+            <h1 class="font-title text-4xl md:text-5xl uppercase tracking-wider mb-6 reveal-on-scroll">Detalles de Amor
+            </h1>
+            <div class="w-24 h-1 bg-black mx-auto mb-8 reveal-on-scroll"></div>
+            <p class="text-gray-600 max-w-xl mx-auto leading-relaxed text-sm md:text-base italic reveal-on-scroll">
+                "Su presencia es nuestro mayor regalo, pero si desean tener un detalle con nosotros,
+                agradecemos su aporte a nuestro futuro hogar."
+            </p>
+        </div>
+    </header>
+
+    <section class="py-16 bg-pattern flex-grow">
+        <div class="max-w-4xl mx-auto px-6">
+
+            <!-- Grid de Tarjetas -->
+            <div class="grid md:grid-cols-2 gap-8 md:gap-12">
+
+                <!-- OPCIÓN 1: BCP -->
+                <div class="gift-card bg-white p-8 rounded-xl shadow-sm text-center relative group reveal-on-scroll">
+                    <div
+                        class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg">
+                        <i class="fa-solid fa-building-columns text-lg"></i>
+                    </div>
+
+                    <h3 class="mt-6 font-title text-xl font-semibold mb-1">Depósito Bancario</h3>
+                    <p class="text-xs text-gray-500 uppercase tracking-widest mb-6">Cuenta BCP Ahorros</p>
+
+                    <div class="bg-gray-50 p-4 rounded-lg border border-gray-100 mb-6">
+                        <p class="font-mono text-lg md:text-xl font-bold text-gray-800 tracking-wider select-all"
+                            id="text-bcp">
+                            57094853271037
+                        </p>
+                    </div>
+
+                    <!-- Botón con referencia 'this' para cambiar el texto al hacer click -->
+                    <button onclick="copiarAlPortapapeles('57094853271037', 'Cuenta BCP', this)"
+                        class="copy-btn w-full bg-black text-white py-3 text-xs uppercase font-bold tracking-widest hover:bg-gray-800 rounded transition duration-300 flex items-center justify-center gap-2">
+                        <i class="fa-regular fa-copy"></i> <span>Copiar Cuenta</span>
+                    </button>
+                </div>
+
+                <!-- OPCIÓN 2: YAPE / PLIN -->
+                <div class="gift-card bg-white p-8 rounded-xl shadow-sm text-center relative group reveal-on-scroll"
+                    style="transition-delay: 100ms;">
+                    <div
+                        class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-purple-600 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg">
+                        <i class="fa-solid fa-mobile-screen text-lg"></i>
+                    </div>
+
+                    <h3 class="mt-6 font-title text-xl font-semibold mb-1">Billetera Digital</h3>
+                    <p class="text-xs text-gray-500 uppercase tracking-widest mb-6">Yape / Plin</p>
+
+                    <!-- Simulación de QR (Placeholder visual) -->
+                    <div onclick="openQrModal()"
+                        class="cursor-pointer w-32 h-32 mx-auto bg-white rounded-lg mb-4 flex items-center justify-center relative overflow-hidden group-hover:scale-105 transition-transform duration-300 border border-gray-100 ring-2 ring-transparent hover:ring-purple-200"
+                        title="Clic para ampliar">
+                        <img src="img/codigoQrYape.png" onerror="this.src='img/codigoQrYape.jpg'" alt="QR Yape"
+                            class="w-full h-full object-contain p-1 pointer-events-none">
+                        <!-- Icono pequeño de lupa para indicar que se puede ampliar -->
+                        <div
+                            class="absolute bottom-1 right-1 bg-white rounded-full p-1 shadow-sm opacity-0 group-hover:opacity-100 transition-opacity">
+                            <i class="fa-solid fa-magnifying-glass-plus text-xs text-purple-600"></i>
+                        </div>
+                    </div>
+
+                    <p class="font-mono text-xl font-bold text-gray-800 mb-6 select-all" id="text-yape">924 120 366</p>
+
+                    <!-- Botón con referencia 'this' -->
+                    <button onclick="copiarAlPortapapeles('924 120 366', 'Número de Celular', this)"
+                        class="copy-btn w-full bg-purple-600 text-white py-3 text-xs uppercase font-bold tracking-widest hover:bg-purple-700 rounded transition duration-300 flex items-center justify-center gap-2">
+                        <i class="fa-regular fa-copy"></i> <span>Copiar Número</span>
+                    </button>
+                </div>
+
+            </div>
+
+            <!-- Mensaje Final -->
+            <div class="mt-16 text-center reveal-on-scroll">
+                <i class="fa-solid fa-envelope-open-text text-3xl text-gray-300 mb-4"></i>
+                <p class="font-script text-2xl text-gray-500">¡Gracias por ser parte de nuestra historia!</p>
+            </div>
+        </div>
+        <!-- MODAL DE QR (NUEVO) -->
+        <div id="qrModal" class="fixed inset-0 z-[100] hidden" aria-labelledby="modal-title" role="dialog"
+            aria-modal="true">
+            <!-- Background backdrop con blur -->
+            <div class="fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity opacity-0 duration-300"
+                id="modalBackdrop" onclick="closeQrModal()"></div>
+
+            <!-- Modal panel -->
+            <div class="fixed inset-0 z-10 overflow-y-auto pointer-events-none">
+                <!-- pointer-events-none en el container para que los clicks pasen al backdrop si no tocan el panel -->
+                <div class="flex min-h-full items-center justify-center p-4 text-center">
+                    <!-- El panel recupera pointer-events -->
+                    <div class="pointer-events-auto relative transform overflow-hidden rounded-xl bg-white text-left shadow-2xl transition-all scale-95 opacity-0 duration-300 ease-out sm:max-w-sm w-full"
+                        id="modalPanel">
+
+                        <!-- Decoración superior -->
+                        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-400 to-pink-400">
+                        </div>
+
+                        <div class="bg-white px-6 pb-6 pt-8 text-center relative">
+                            <!-- Botón cerrar flotante -->
+                            <button onclick="closeQrModal()"
+                                class="absolute top-3 right-3 text-gray-400 hover:text-black transition-colors w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100">
+                                <i class="fa-solid fa-xmark text-lg"></i>
+                            </button>
+
+                            <h3 class="font-script text-3xl text-gray-800 mb-2">¡Escanea con Amor!</h3>
+                            <p class="text-xs text-gray-400 uppercase tracking-widest mb-6">Yape / Plin</p>
+
+                            <div
+                                class="w-64 h-64 mx-auto border-4 border-double border-purple-100 rounded-lg p-2 mb-4 relative bg-white shadow-inner">
+                                <img src="img/codigoQrYape.png" onerror="this.src='img/codigoQrYape.jpg'"
+                                    alt="QR Yape Grande" class="w-full h-full object-contain">
+                                <!-- Corazón decorativo animado -->
+                                <div class="absolute -top-3 -right-3 bg-white rounded-full p-1 shadow-md">
+                                    <i class="fa-solid fa-heart text-purple-500 text-xl animate-pulse"></i>
+                                </div>
+                            </div>
+
+                            <p class="font-mono text-2xl font-bold text-gray-800 tracking-wider">987 654 321</p>
+                            <p class="text-xs text-gray-500 mt-2 font-body italic">"Gracias por el detalle"</p>
+                        </div>
+
+                        <div
+                            class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6 justify-center border-t border-gray-100">
+                            <button type="button"
+                                class="inline-flex w-full justify-center rounded bg-black px-6 py-2 text-xs font-bold uppercase tracking-widest text-white shadow-sm hover:bg-gray-800 sm:w-auto transition-colors"
+                                onclick="closeQrModal()">
+                                Cerrar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="app.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ubicacion</title>
+    <link rel="icon" href="img/iconPerry.png" type="image/png">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <!-- SweetAlert2 para Alertas Bonitas (Mejora UX) -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body class="bg-white text-gray-900 font-body antialiased overflow-x-hidden">
+    <section id="ubicacion" class="py-24 bg-gray-50 reveal-on-scroll scroll-mt-24">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-10">
+                <h3 class="font-title text-3xl mb-2">Recepción</h3>
+                <p class="font-body text-gray-600">Restaurante Sol y Fiesta</p>
+                <p class="text-sm text-gray-500">Carr. Campiña de Moche 1589</p>
+            </div>
+
+            <div class="w-100 h-80 rounded-lg overflow-hidden shadow-lg">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d987.3850617180555!2d-79.0076773304239!3d-8.148195699492637!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91ad17f026c26c05%3A0x67dcf8c8ce7a17c1!2sCarr.%20Campi%C3%B1a%20de%20Moche%201588%2C%20Moche%2013600!5e0!3m2!1ses-419!2spe!4v1768192888570!5m2!1ses-419!2spe"
+                    width="1500" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+
+            <div class="mt-8 text-center">
+                <a href="https://maps.app.goo.gl/NkgkX9KkforXuyTs7" target="_blank"
+                    class="inline-block border border-black px-8 py-3 text-xs uppercase font-bold tracking-widest hover:bg-black hover:text-white transition">
+                    Ver en Google Maps
+                </a>
+            </div>
+        </div>
+    </section>
+    <script src="app.js"></script>
+
+</body>
+
+</html>
