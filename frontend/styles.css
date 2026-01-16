@@ -123,6 +123,58 @@ html {
   }
 }
 
+@keyframes pulseAttention {
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
+
+  100% {
+    box-shadow: 0 0 0 15px rgba(0, 0, 0, 0);
+    transform: scale(1);
+  }
+}
+
+@keyframes bounceBigger {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes mobileAttention {
+  0% {
+    transform: scale(1) translateX(0);
+  }
+
+  50% {
+    transform: scale(1.08) translateX(-8px);
+  }
+
+  100% {
+    transform: scale(1) translateX(0);
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .animate-hero-text {
   animation: fadeInScale 2s ease-out forwards;
 }
@@ -149,7 +201,6 @@ html {
 .polaroid-container {
   background-color: white;
   padding: 12px 12px 40px 12px;
-  /* Padding extra abajo para caption */
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   transform: rotate(var(--rotation, 0deg));
@@ -162,7 +213,6 @@ html {
 /* Efecto Hover Polaroid */
 .polaroid-container:hover {
   transform: scale(1.05) rotate(0deg) !important;
-  /* Resetea rotación y agranda */
   box-shadow: 0 20px 30px rgba(0, 0, 0, 0.25);
   z-index: 20;
 }
@@ -172,13 +222,11 @@ html {
   height: auto;
   display: block;
   filter: grayscale(100%);
-  /* B&W por defecto */
-  transition: filter 0.5s ease;
+  transition: filter 0.35s ease-out;
 }
 
 .polaroid-container:hover img {
   filter: grayscale(0%);
-  /* Color al hover */
 }
 
 .polaroid-caption {
@@ -192,17 +240,44 @@ html {
   color: #444;
 }
 
-/* Botón Flotante Cámara */
+/* =========================================
+   5. BOTÓN FLOTANTE CÁMARA - MEJORADO
+   ========================================= */
 .floating-camera-btn {
   animation: float 3s ease-in-out infinite;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 40;
 }
 
-/* Lightbox (Visor) */
+/* Animación de pulso para atraer atención */
+.floating-camera-btn.pulse-attention {
+  animation: float 3s ease-in-out infinite, pulseAttention 2.5s ease-in-out infinite;
+}
+
+/* Animación especial para mobile */
+.floating-camera-btn.mobile-attention {
+  animation: float 3s ease-in-out infinite, mobileAttention 1.5s ease-in-out 0.5s infinite !important;
+}
+
+/* Tooltip mejorado con animación */
+.group>div[class*="bottom-full"] {
+  transition: all 0.3s ease;
+}
+
+.animate-bounce-in {
+  animation: fadeInScale 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* =========================================
+   6. LIGHTBOX (VISOR)
+   ========================================= */
 #lightbox {
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s ease;
+  backdrop-filter: blur(4px);
 }
 
 #lightbox.active {
@@ -215,10 +290,20 @@ html {
   max-width: 90vw;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
   border: 8px solid white;
+  transition: transform 0.3s ease;
+}
+
+#lightbox button {
+  transition: all 0.2s ease;
+}
+
+#lightbox button:hover {
+  color: white;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
 /* =========================================
-   6. REPRODUCTOR DE MÚSICA (NUEVO)
+   7. REPRODUCTOR DE MÚSICA
    ========================================= */
 .music-control-btn {
   position: fixed;
@@ -245,7 +330,6 @@ html {
   transform: scale(1.1);
 }
 
-/* Animación de ondas cuando suena la música */
 .music-playing {
   animation: pulse-border 2s infinite;
 }
@@ -264,17 +348,69 @@ html {
   }
 }
 
-/* Icono girando suavemente si está reproduciendo */
 .music-playing i {
   animation: spin-slow 8s linear infinite;
 }
 
-@keyframes spin-slow {
+/* =========================================
+   8. OPTIMIZACIÓN DE CARGA DE IMÁGENES
+   ========================================= */
+.polaroid-container {
+  /* Garantizar que el contenedor sea consistente */
+  background-color: white;
+  aspect-ratio: 3/4;
+}
+
+.polaroid-container img {
+  /* Asegurar que la imagen llene todo el espacio disponible */
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+/* Efecto suave de fade cuando carga */
+@keyframes imageLoad {
   from {
-    transform: rotate(0deg);
+    opacity: 0;
   }
 
   to {
-    transform: rotate(360deg);
+    opacity: 1;
+  }
+}
+
+.polaroid-container img:not(.opacity-0) {
+  animation: imageLoad 0.6s ease-out;
+}
+
+/* =========================================
+   9. RESPONSIVE - MOBILE
+   ========================================= */
+@media (max-width: 768px) {
+  .floating-camera-btn {
+    width: 3rem;
+    height: 3rem;
+    font-size: 1rem;
+  }
+
+  .music-control-btn {
+    width: 3rem;
+    height: 3rem;
+    font-size: 1rem;
+    bottom: 1rem;
+    left: 1rem;
+  }
+
+  .polaroid-container {
+    padding: 10px 10px 35px 10px;
+  }
+
+  .polaroid-caption {
+    font-size: 1.2rem;
+  }
+
+  /* El tooltip se oculta en mobile para no ocupar espacio */
+  .group>div[class*="bottom-full"] {
+    display: none;
   }
 }

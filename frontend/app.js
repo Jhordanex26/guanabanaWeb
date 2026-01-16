@@ -4,32 +4,43 @@
 // ==========================================
 // 1. CONFIGURACIÓN GLOBAL Y VARIABLES DE ESTADO
 // ==========================================
-const AUDIO_SRC = 'img/audioBodaGuanabana.mp3'; // Asegúrate que esta ruta sea correcta
+const AUDIO_SRC = 'img/audioBodaGuanabana.mp3';
 let globalAudio = new Audio(AUDIO_SRC);
 globalAudio.loop = true;
 let isMusicPlaying = false;
-let musicBtn = null; // Referencia al botón flotante
+let musicBtn = null;
+
+// Control de scroll para prevenir bugs de click
+let isScrolling = false;
+let scrollTimeout;
 
 // ==========================================
 // 2. INICIALIZACIÓN PRINCIPAL
 // ==========================================
 document.addEventListener('DOMContentLoaded', () => {
-
-    // A. Iniciar el sistema de música persistente
     setupPersistentMusic();
-
-    // B. Iniciar scripts de la página actual (Animaciones, Countdown, etc.)
     initPageScripts();
-
-    // C. Activar navegación sin recargas (SPA)
     enableSeamlessNavigation();
+    setupScrollDetection();
 });
 
 // ==========================================
-// 3. SISTEMA DE MÚSICA PERSISTENTE
+// 3. DETECCIÓN DE SCROLL PARA EVITAR BUGS
+// ==========================================
+function setupScrollDetection() {
+    window.addEventListener('scroll', () => {
+        isScrolling = true;
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+            isScrolling = false;
+        }, 150); // Esperar 150ms después de que termine el scroll
+    }, { passive: true });
+}
+
+// ==========================================
+// 4. SISTEMA DE MÚSICA PERSISTENTE
 // ==========================================
 function setupPersistentMusic() {
-    // Crear el botón si no existe
     if (!document.querySelector('.music-control-btn')) {
         musicBtn = document.createElement('button');
         musicBtn.className = 'music-control-btn';
@@ -37,17 +48,13 @@ function setupPersistentMusic() {
         musicBtn.title = 'Música de fondo';
         musicBtn.style.zIndex = '9999';
         document.body.appendChild(musicBtn);
-
-        // Evento Click Específico del Botón
         musicBtn.addEventListener('click', toggleMusic);
     } else {
         musicBtn = document.querySelector('.music-control-btn');
     }
 
-    // Recuperar estado. Si es la primera vez (null), asumimos que queremos reproducir (true)
     const savedTime = localStorage.getItem('bgMusicTime');
     const savedState = localStorage.getItem('bgMusicPlaying');
-    // Si no hay estado guardado (primera visita), intentamos reproducir
     const shouldPlay = savedState === null || savedState === 'true';
 
     if (savedTime) globalAudio.currentTime = parseFloat(savedTime);
@@ -58,41 +65,34 @@ function setupPersistentMusic() {
         updateMusicUI(false);
     }
 
-    // Guardar progreso periódicamente
     setInterval(() => {
         if (isMusicPlaying) localStorage.setItem('bgMusicTime', globalAudio.currentTime);
     }, 1000);
 }
 
-// NUEVA FUNCIÓN: Intentar Autoplay y Fallback
 function attemptAutoPlay() {
     const playPromise = globalAudio.play();
 
     if (playPromise !== undefined) {
         playPromise.then(() => {
-            // Éxito: El navegador permitió el autoplay
             isMusicPlaying = true;
             localStorage.setItem('bgMusicPlaying', 'true');
             updateMusicUI(true);
         }).catch(error => {
-            // Fallo: El navegador bloqueó el audio (Política de Autoplay)
             console.log("Autoplay bloqueado. Esperando primera interacción del usuario.");
             updateMusicUI(false);
 
-            // ESTRATEGIA: Activar audio con el PRIMER clic en cualquier parte de la página
             const unlockAudio = () => {
                 globalAudio.play().then(() => {
                     isMusicPlaying = true;
                     localStorage.setItem('bgMusicPlaying', 'true');
                     updateMusicUI(true);
-                    // Limpiamos los listeners para que no se ejecuten más veces
                     document.removeEventListener('click', unlockAudio);
                     document.removeEventListener('touchstart', unlockAudio);
                     document.removeEventListener('keydown', unlockAudio);
                 });
             };
 
-            // Escuchamos cualquier interacción "fuerte"
             document.addEventListener('click', unlockAudio);
             document.addEventListener('touchstart', unlockAudio);
             document.addEventListener('keydown', unlockAudio);
@@ -101,7 +101,6 @@ function attemptAutoPlay() {
 }
 
 function toggleMusic(e) {
-    // Detenemos la propagación para que este click no se confunda con el "unlockAudio"
     if (e) e.stopPropagation();
 
     if (globalAudio.paused) {
@@ -136,7 +135,7 @@ function updateMusicUI(isPlaying) {
 }
 
 // ==========================================
-// 4. NAVEGACIÓN SPA (SIN RECARGAS)
+// 5. NAVEGACIÓN SPA (SIN RECARGAS)
 // ==========================================
 function enableSeamlessNavigation() {
     document.body.addEventListener('click', e => {
@@ -170,7 +169,6 @@ async function loadPageContent(url, pushState = true) {
         const newDoc = parser.parseFromString(htmlText, 'text/html');
         const newBody = newDoc.body;
 
-        // Mantener botón de música
         const currentMusicBtn = document.querySelector('.music-control-btn');
         if (currentMusicBtn) currentMusicBtn.remove();
 
@@ -178,7 +176,6 @@ async function loadPageContent(url, pushState = true) {
         document.body.className = newBody.className;
         document.title = newDoc.title;
 
-        // Reiniciar música (sin perder estado)
         setupPersistentMusic();
 
         if (pushState) window.history.pushState({}, '', url);
@@ -195,7 +192,7 @@ async function loadPageContent(url, pushState = true) {
 }
 
 // ==========================================
-// 5. LÓGICA DE PÁGINA (SE EJECUTA EN CADA CAMBIO)
+// 6. LÓGICA DE PÁGINA (SE EJECUTA EN CADA CAMBIO)
 // ==========================================
 function initPageScripts() {
 
@@ -227,7 +224,10 @@ function initPageScripts() {
         }, 1000);
     }
 
-    // B. ANIMACIONES SCROLL
+    // B. ANIMACIONES SCROLL - COLORIZACIÓN DE FOTOS
+    setupPhotoColorization();
+
+    // C. ANIMACIONES SCROLL - REVEAL
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -239,20 +239,111 @@ function initPageScripts() {
 
     document.querySelectorAll('.reveal-on-scroll').forEach(section => observer.observe(section));
 
-    // C. EVENTOS LIGHTBOX
+    // D. EVENTOS LIGHTBOX
     document.removeEventListener('keydown', handleEscKey);
     document.addEventListener('keydown', handleEscKey);
+
+    // E. INDICADOR ANIMADO DEL BOTÓN CÁMARA
+    setupCameraButtonIndicator();
 }
+
+// ==========================================
+// 7. COLORIZACIÓN DE FOTOS EN SCROLL
+// ==========================================
+function setupPhotoColorization() {
+    const photos = document.querySelectorAll('.polaroid-container img');
+
+    const colorizeOnScroll = () => {
+        photos.forEach(img => {
+            const rect = img.getBoundingClientRect();
+            const elementCenter = rect.top + rect.height / 2;
+            const viewportCenter = window.innerHeight / 2;
+
+            // Calcular proximidad al centro (0 = lejos, 1 = en el centro)
+            const distance = Math.abs(elementCenter - viewportCenter);
+            const maxDistance = window.innerHeight / 2;
+            const proximity = Math.max(0, 1 - (distance / maxDistance));
+
+            // Aplicar filtro dinámico basado en proximidad
+            const grayscale = Math.max(0, 1 - proximity);
+            img.style.filter = `grayscale(${grayscale})`;
+        });
+    };
+
+    // Ejecutar en scroll
+    window.addEventListener('scroll', colorizeOnScroll, { passive: true });
+
+    // Ejecutar inicial
+    colorizeOnScroll();
+}
+
+// ==========================================
+// 8. INDICADOR VISUAL DEL BOTÓN CÁMARA
+// ==========================================
+function setupCameraButtonIndicator() {
+    const cameraBtn = document.querySelector('.floating-camera-btn');
+    if (!cameraBtn) return;
+
+    // Añadir clase de pulso
+    cameraBtn.classList.add('pulse-attention');
+
+    // Mostrar tooltip mejorado con animación
+    const tooltip = cameraBtn.parentElement.querySelector('div');
+    if (tooltip) {
+        tooltip.classList.add('animate-bounce-in');
+    }
+
+    // Efecto de atracción en mobile
+    if (window.innerWidth < 768) {
+        cameraBtn.classList.add('mobile-attention');
+    }
+}
+
+// ==========================================
+// 9. MODIFICAR FUNCIÓN OPENLLIGHTBOX PARA EVITAR BUGS
+// ==========================================
+window.openLightbox = function (element) {
+    // Prevenir apertura si estamos scrolleando
+    if (isScrolling) return;
+
+    const img = element.querySelector('img');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+
+    if (img && lightbox && lightboxImg) {
+        if (img.src.includes('bg-gray-100')) return;
+        lightboxImg.src = img.src;
+        lightbox.classList.remove('hidden');
+        lightbox.classList.add('active');
+        setTimeout(() => {
+            lightboxImg.classList.remove('scale-95');
+            lightboxImg.classList.add('scale-100');
+        }, 10);
+        document.body.style.overflow = 'hidden';
+    }
+};
+
+window.closeLightbox = function () {
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    if (lightbox) {
+        lightbox.classList.remove('active');
+        if (lightboxImg) {
+            lightboxImg.classList.remove('scale-100');
+            lightboxImg.classList.add('scale-95');
+        }
+        document.body.style.overflow = '';
+    }
+};
 
 function handleEscKey(event) {
     if (event.key === "Escape") window.closeLightbox();
 }
 
 // ==========================================
-// 6. FUNCIONES UTILITARIAS (GLOBALES)
+// 10. FUNCIONES UTILITARIAS (GLOBALES)
 // ==========================================
 
-// COPIAR AL PORTAPAPELES
 window.copiarAlPortapapeles = function (texto, tipo, btnElement) {
     const actualizarBoton = () => {
         if (btnElement) {
@@ -314,7 +405,6 @@ window.mostrarAlerta = function (tipo) {
     Toast.fire({ icon: 'success', title: `${tipo} copiado` });
 };
 
-// MODALES QR & LIGHTBOX
 window.openQrModal = function () {
     const modal = document.getElementById('qrModal');
     const backdrop = document.getElementById('modalBackdrop');
@@ -327,6 +417,7 @@ window.openQrModal = function () {
         panel?.classList.add('scale-100', 'opacity-100');
     });
 };
+
 window.closeQrModal = function () {
     const modal = document.getElementById('qrModal');
     const backdrop = document.getElementById('modalBackdrop');
@@ -338,41 +429,16 @@ window.closeQrModal = function () {
     setTimeout(() => { modal.classList.add('hidden'); }, 300);
 };
 
-window.openLightbox = function (element) {
-    const img = element.querySelector('img');
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
-    if (img && lightbox && lightboxImg) {
-        if (img.src.includes('bg-gray-100')) return;
-        lightboxImg.src = img.src;
-        lightbox.classList.remove('hidden');
-        lightbox.classList.add('active');
-        setTimeout(() => {
-            lightboxImg.classList.remove('scale-95');
-            lightboxImg.classList.add('scale-100');
-        }, 10);
-        document.body.style.overflow = 'hidden';
-    }
-};
-window.closeLightbox = function () {
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
-    if (lightbox) {
-        lightbox.classList.remove('active');
-        if (lightboxImg) {
-            lightboxImg.classList.remove('scale-100');
-            lightboxImg.classList.add('scale-95');
-        }
-        document.body.style.overflow = '';
-    }
-};
-
 window.abrirSubidaFotos = function () {
     Swal.fire({
-        title: '¡Sé nuestro Paparazzi!', text: 'Sube aquí tus mejores capturas.', icon: 'camera',
-        confirmButtonText: 'Subir Fotos', confirmButtonColor: '#000', showCancelButton: true, cancelButtonText: 'Cerrar'
+        title: '¡Sé nuestro Paparazzi!',
+        text: 'Sube aquí tus mejores capturas.',
+        icon: 'camera',
+        confirmButtonText: 'Subir Fotos',
+        confirmButtonColor: '#000',
+        showCancelButton: true,
+        cancelButtonText: 'Cerrar'
     }).then((result) => {
         if (result.isConfirmed) window.open('https://photos.app.goo.gl/Uf4z7rpbS9b9SdpU8', '_blank');
     });
 };
-
