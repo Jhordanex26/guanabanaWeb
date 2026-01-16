@@ -375,3 +375,4 @@ window.abrirSubidaFotos = function () {
         if (result.isConfirmed) window.open('https://photos.app.goo.gl/Uf4z7rpbS9b9SdpU8', '_blank');
     });
 };
+

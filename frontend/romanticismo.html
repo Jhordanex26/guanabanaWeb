@@ -41,7 +41,6 @@
     </header>
 
     <!-- GALERÍA POLAROID SOBRE FONDO "SAVE THE DATE" -->
-    <!-- Nota: 'bg-fixed' crea el efecto parallax, 'bg-cover' ajusta la imagen -->
     <section class="relative min-h-screen py-20 bg-fixed bg-center bg-cover"> <!-- AQUÍ VA TU FOTO DE FONDO -->
 
         <!-- Capa oscura para que resalten las polaroids -->
@@ -49,32 +48,56 @@
 
         <div class="container mx-auto px-4 max-w-6xl relative z-10">
 
-            <!-- Grid Masonry para las 10 Fotos -->
+            <!-- Grid Masonry para las Fotos -->
             <div class="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8 px-2">
 
-                <!-- FOTO 1: Rotación aleatoria -->
+                <!-- FOTO 1 -->
                 <div class="polaroid-container reveal-on-scroll" style="--rotation: -2deg;"
                     onclick="openLightbox(this)">
-                    <img src="img/album3.jpg" alt="Primer Encuentro">
+                    <!-- Icono de Carga Giratorio -->
+
+                    <div class="absolute inset-0 flex items-center justify-center z-0 pb-10">
+                        <i class="fa-solid fa-circle-notch fa-spin text-3xl text-gray-300"></i>
+                    </div>
+
+                    <!-- Imagen con efecto de aparición -->
+                    <img src="img/album3.jpg" alt="Primer Encuentro"
+                        class="relative z-10 opacity-0 transition-opacity duration-700 w-full"
+                        onload="this.classList.remove('opacity-0')" loading="eager">
                     <div class="polaroid-caption">Un <b>sí</b> para siempre</div>
                 </div>
 
                 <!-- FOTO 2 -->
                 <div class="polaroid-container reveal-on-scroll" style="--rotation: 3deg;" onclick="openLightbox(this)">
-                    <img src="img/album5.JPG" alt="Viajes">
+                    <div class="absolute inset-0 flex items-center justify-center z-0 pb-10">
+                        <i class="fa-solid fa-circle-notch fa-spin text-3xl text-gray-300"></i>
+                    </div>
+                    <img src="img/album5.JPG" alt="Viajes"
+                        class="relative z-10 opacity-0 transition-opacity duration-700 w-full"
+                        onload="this.classList.remove('opacity-0')" loading="eager">
                     <div class="polaroid-caption">Un Lugar Especial</div>
                 </div>
 
                 <!-- FOTO 3 -->
                 <div class="polaroid-container reveal-on-scroll" style="--rotation: -1deg;"
                     onclick="openLightbox(this)">
-                    <img src="img/album10.JPG" alt="Compromiso">
+                    <div class="absolute inset-0 flex items-center justify-center z-0 pb-10">
+                        <i class="fa-solid fa-circle-notch fa-spin text-3xl text-gray-300"></i>
+                    </div>
+                    <img src="img/album10.JPG" alt="Compromiso"
+                        class="relative z-10 opacity-0 transition-opacity duration-700 w-full"
+                        onload="this.classList.remove('opacity-0')" loading="lazy">
                     <div class="polaroid-caption">Amor puro</div>
                 </div>
 
                 <!-- FOTO 4 -->
                 <div class="polaroid-container reveal-on-scroll" style="--rotation: 2deg;" onclick="openLightbox(this)">
+                    <div class="absolute inset-0 flex items-center justify-center z-0 pb-10">
+                        <i class="fa-solid fa-circle-notch fa-spin text-3xl text-gray-300"></i>
+                    </div>
                     <img src="img/album7.jpg" alt="Risas"
+                        class="relative z-10 opacity-0 transition-opacity duration-700 w-full"
+                        onload="this.classList.remove('opacity-0')" loading="lazy"
                         onerror="this.src='https://images.unsplash.com/photo-1511285560982-1351cdeb9821?auto=format&fit=crop&q=80&w=600'">
                     <div class="polaroid-caption">Momentos Divertidos</div>
                 </div>
@@ -82,15 +105,24 @@
                 <!-- FOTO 5 -->
                 <div class="polaroid-container reveal-on-scroll" style="--rotation: -3deg;"
                     onclick="openLightbox(this)">
+                    <div class="absolute inset-0 flex items-center justify-center z-0 pb-10">
+                        <i class="fa-solid fa-circle-notch fa-spin text-3xl text-gray-300"></i>
+                    </div>
                     <img src="img/album4.jpg" alt="Familia"
+                        class="relative z-10 opacity-0 transition-opacity duration-700 w-full"
+                        onload="this.classList.remove('opacity-0')" loading="lazy"
                         onerror="this.src='https://images.unsplash.com/photo-1529634806980-85c3dd6d62f0?auto=format&fit=crop&q=80&w=600'">
                     <div class="polaroid-caption">Lo que mas disfrutamos hacer juntos</div>
                 </div>
 
                 <!-- FOTO 6 -->
-                <div class="polaroid-container reveal-
-            on-scroll" style="--rotation: 1deg;" onclick="openLightbox(this)">
+                <div class="polaroid-container reveal-on-scroll" style="--rotation: 1deg;" onclick="openLightbox(this)">
+                    <div class="absolute inset-0 flex items-center justify-center z-0 pb-10">
+                        <i class="fa-solid fa-circle-notch fa-spin text-3xl text-gray-300"></i>
+                    </div>
                     <img src="img/album9.JPG" alt="Mascota"
+                        class="relative z-10 opacity-0 transition-opacity duration-700 w-full"
+                        onload="this.classList.remove('opacity-0')" loading="lazy"
                         onerror="this.src='https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&q=80&w=600'">
                     <div class="polaroid-caption">Aventuras Juntos</div>
                 </div>
@@ -98,50 +130,78 @@
                 <!-- FOTO 7 -->
                 <div class="polaroid-container reveal-on-scroll" style="--rotation: -2deg;"
                     onclick="openLightbox(this)">
+                    <div class="absolute inset-0 flex items-center justify-center z-0 pb-10">
+                        <i class="fa-solid fa-circle-notch fa-spin text-3xl text-gray-300"></i>
+                    </div>
                     <img src="img/album1.jpg" alt="Citas"
+                        class="relative z-10 opacity-0 transition-opacity duration-700 w-full"
+                        onload="this.classList.remove('opacity-0')" loading="lazy"
                         onerror="this.src='https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&q=80&w=600'">
                     <div class="polaroid-caption">Bendiciones de Jehová</div>
                 </div>
 
                 <!-- FOTO 8 -->
                 <div class="polaroid-container reveal-on-scroll" style="--rotation: 4deg;" onclick="openLightbox(this)">
+                    <div class="absolute inset-0 flex items-center justify-center z-0 pb-10">
+                        <i class="fa-solid fa-circle-notch fa-spin text-3xl text-gray-300"></i>
+                    </div>
                     <img src="img/album15.jpg" alt="Casual"
+                        class="relative z-10 opacity-0 transition-opacity duration-700 w-full"
+                        onload="this.classList.remove('opacity-0')" loading="lazy"
                         onerror="this.src='https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&q=80&w=600'">
                     <div class="polaroid-caption">La Familia que Jehová nos regaló</div>
                 </div>
 
-                <!-- FOTO 9 (Nueva) -->
+                <!-- FOTO 9 -->
                 <div class="polaroid-container reveal-on-scroll" style="--rotation: -1deg;"
                     onclick="openLightbox(this)">
+                    <div class="absolute inset-0 flex items-center justify-center z-0 pb-10">
+                        <i class="fa-solid fa-circle-notch fa-spin text-3xl text-gray-300"></i>
+                    </div>
                     <img src="img/album6.jpg" alt="Playa"
+                        class="relative z-10 opacity-0 transition-opacity duration-700 w-full"
+                        onload="this.classList.remove('opacity-0')" loading="lazy"
                         onerror="this.src='https://images.unsplash.com/photo-1510525009512-ad7fc13eefab?auto=format&fit=crop&q=80&w=600'">
                     <div class="polaroid-caption">Nuestro Feliz Compromiso</div>
                 </div>
 
-                <!-- FOTO 10 (Nueva) -->
+                <!-- FOTO 10 -->
                 <div class="polaroid-container reveal-on-scroll" style="--rotation: 3deg;" onclick="openLightbox(this)">
+                    <div class="absolute inset-0 flex items-center justify-center z-0 pb-10">
+                        <i class="fa-solid fa-circle-notch fa-spin text-3xl text-gray-300"></i>
+                    </div>
                     <img src="img/album14.jpeg" alt="Beso"
+                        class="relative z-10 opacity-0 transition-opacity duration-700 w-full"
+                        onload="this.classList.remove('opacity-0')" loading="lazy"
                         onerror="this.src='https://images.unsplash.com/photo-1522673607200-1645062cd958?auto=format&fit=crop&q=80&w=600'">
                     <div class="polaroid-caption">Construyendo nuestro futuro</div>
                 </div>
 
+                <!-- FOTO 11 -->
                 <div class="polaroid-container reveal-on-scroll" style="--rotation: 3deg;" onclick="openLightbox(this)">
+                    <div class="absolute inset-0 flex items-center justify-center z-0 pb-10">
+                        <i class="fa-solid fa-circle-notch fa-spin text-3xl text-gray-300"></i>
+                    </div>
                     <img src="img/album11.jpg" alt="Beso"
+                        class="relative z-10 opacity-0 transition-opacity duration-700 w-full"
+                        onload="this.classList.remove('opacity-0')" loading="lazy"
                         onerror="this.src='https://images.unsplash.com/photo-1522673607200-1645062cd958?auto=format&fit=crop&q=80&w=600'">
                     <div class="polaroid-caption">De la mano siempre...</div>
                 </div>
 
+                <!-- FOTO 12 -->
                 <div class="polaroid-container reveal-on-scroll" style="--rotation: -1deg;"
                     onclick="openLightbox(this)">
+                    <div class="absolute inset-0 flex items-center justify-center z-0 pb-10">
+                        <i class="fa-solid fa-circle-notch fa-spin text-3xl text-gray-300"></i>
+                    </div>
                     <img src="img/album12.jpg" alt="Playa"
+                        class="relative z-10 opacity-0 transition-opacity duration-700 w-full"
+                        onload="this.classList.remove('opacity-0')" loading="lazy"
                         onerror="this.src='https://images.unsplash.com/photo-1510525009512-ad7fc13eefab?auto=format&fit=crop&q=80&w=600'">
                     <div class="polaroid-caption">Momentos Dulces</div>
                 </div>
-                <!-- <div class="polaroid-container reveal-on-scroll" style="--rotation: 2deg;" onclick="openLightbox(this)">
-                    <img src="img/album6.jpg" alt="Risas"
-                        onerror="this.src='https://images.unsplash.com/photo-1511285560982-1351cdeb9821?auto=format&fit=crop&q=80&w=600'">
-                    <div class="polaroid-caption">Cómplices</div>
-                </div> -->
+
             </div>
         </div>
     </section>
