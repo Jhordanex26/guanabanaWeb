@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ubicacion</title>
-    <link rel="icon" href="img/iconPerry.png" type="image/png">
+    <title>Ubicación | Saint & Diana</title>
+    <link rel="icon" href="img/iconPerryAnime.jpg" type="image/jpg">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -13,42 +13,148 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="styles.css">
     <link
         href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap"
         rel="stylesheet">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
-    <!-- SweetAlert2 para Alertas Bonitas (Mejora UX) -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 
-<body class="bg-white text-gray-900 font-body antialiased overflow-x-hidden">
-    <section id="ubicacion" class="py-24 bg-gray-50 reveal-on-scroll scroll-mt-24">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-10">
-                <h3 class="font-title text-3xl mb-2">Recepción</h3>
-                <p class="font-body text-gray-600">Restaurante Sol y Fiesta</p>
-                <p class="text-sm text-gray-500">Carr. Campiña de Moche 1589</p>
-            </div>
-
-            <div class="w-100 h-80 rounded-lg overflow-hidden shadow-lg">
-                <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d987.3850617180555!2d-79.0076773304239!3d-8.148195699492637!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91ad17f026c26c05%3A0x67dcf8c8ce7a17c1!2sCarr.%20Campi%C3%B1a%20de%20Moche%201588%2C%20Moche%2013600!5e0!3m2!1ses-419!2spe!4v1768192888570!5m2!1ses-419!2spe"
-                    width="1500" height="450" style="border:0;" allowfullscreen="" loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade">
-                </iframe>
-            </div>
-
-            <div class="mt-8 text-center">
-                <a href="https://maps.app.goo.gl/NkgkX9KkforXuyTs7" target="_blank"
-                    class="inline-block border border-black px-8 py-3 text-xs uppercase font-bold tracking-widest hover:bg-black hover:text-white transition">
-                    Ver en Google Maps
-                </a>
-            </div>
+<body class="bg-white text-gray-900 font-body antialiased overflow-x-hidden flex flex-col min-h-screen">
+    <!-- HEADER -->
+    <header class="py-12 md:py-16 bg-gray-50 text-center relative overflow-hidden">
+        <div class="container mx-auto px-6 relative z-10">
+            <span class="font-script text-4xl md:text-5xl text-gray-400 mb-2 block reveal-on-scroll">El Camino</span>
+            <h1 class="font-title text-3xl md:text-5xl uppercase tracking-wider mb-6 reveal-on-scroll">Hacia un futuro
+                juntos</h1>
+            <div class="w-24 h-1 bg-black mx-auto mb-4 reveal-on-scroll"></div>
+            <p class="text-sm text-gray-500 uppercase tracking-widest reveal-on-scroll">23 de Febrero, 2026</p>
         </div>
-    </section>
+    </header>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="flex-grow">
+
+        <section class="py-12 md:py-20 bg-white">
+            <div class="container mx-auto px-6 max-w-6xl">
+                <!-- Usamos lg:grid-cols-2 para que en tablets se vea en columna única -->
+                <div class="grid lg:grid-cols-2 gap-8 md:gap-16 items-center reveal-on-scroll">
+
+                    <!-- Información -->
+                    <div class="text-center lg:text-left order-1 px-4 lg:px-0">
+                        <h2 class="font-title text-3xl md:text-4xl mb-4 text-black">Discurso Matrimonial</h2>
+                        <div class="w-12 h-0.5 bg-black mx-auto lg:mx-0 mb-6"></div>
+
+                        <p class="font-script text-3xl text-gray-600 mb-2">Salón del Reino</p>
+                        <p class="font-body text-gray-500 mb-8 leading-relaxed text-sm md:text-base">
+                            Acompáñanos en el momento más espiritual de nuestra unión.
+                            El discurso bíblico que marcará el inicio de nuestra vida juntos.
+                        </p>
+
+                        <div class="flex flex-col md:flex-row gap-4 md:gap-6 mb-8 justify-center lg:justify-start">
+                            <div class="flex items-center gap-3 text-sm text-gray-800 justify-center lg:justify-start">
+                                <i class="fa-regular fa-clock text-xl text-gray-600"></i>
+                                <span>4:30 PM</span>
+                            </div>
+                            <div class="flex items-center gap-3 text-sm text-gray-800 justify-center lg:justify-start">
+                                <i class="fa-solid fa-map-pin text-xl text-gray-600"></i>
+                                <span>Florencia de Mora, Calle 26 de Julio #537</span>
+                            </div>
+                        </div>
+
+                        <a href="https://maps.app.goo.gl/d9GzxyTJxwZrNmRA9" target="_blank"
+                            class="btn-elegant inline-block border border-black text-black px-8 py-3 text-xs uppercase font-bold tracking-widest">
+                            Ver en Maps
+                        </a>
+                    </div>
+
+                    <!-- Mapa (Centrado y Alineado) -->
+                    <div class="order-2 w-full flex justify-center lg:justify-end">
+                        <div
+                            class="map-frame h-72 md:h-[400px] w-full max-w-lg shadow-xl border border-gray-100 rounded-lg overflow-hidden transition-transform duration-500 hover:scale-[1.02]">
+                            <!-- IFRAME CEREMONIA -->
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d18790.17985303414!2d-79.02233114067258!3d-8.08631171166178!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91ad3dbd34d2a2c3%3A0x6e1382579425eff!2sSal%C3%B3n%20del%20Reino%20de%20los%20Testigos%20de%20Jehov%C3%A1!5e0!3m2!1ses-419!2spe!4v1768331122636!5m2!1ses-419!2spe"
+                                style="border:0; width: 100%; height: 100%;" allowfullscreen="" loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Separador Decorativo -->
+        <div class="flex justify-center items-center py-4 bg-gray-50 opacity-50">
+            <div class="h-px w-16 md:w-24 bg-gray-300"></div>
+            <i class="fa-solid fa-heart mx-4 text-gray-300 text-sm"></i>
+            <div class="h-px w-16 md:w-24 bg-gray-300"></div>
+        </div>
+
+        <!-- SECCIÓN 2: RECEPCIÓN (Fondo Gris Claro) -->
+        <section class="py-12 md:py-20 bg-gray-50">
+            <div class="container mx-auto px-6 max-w-6xl">
+                <div class="grid lg:grid-cols-2 gap-8 md:gap-16 items-center reveal-on-scroll">
+
+                    <!-- Mapa (Centrado y Alineado) -->
+                    <div class="order-2 lg:order-1 w-full flex justify-center lg:justify-start">
+                        <div
+                            class="map-frame h-72 md:h-[400px] w-full max-w-lg shadow-xl border border-gray-100 rounded-lg overflow-hidden transition-transform duration-500 hover:scale-[1.02]">
+                            <!-- IFRAME RECEPCION -->
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d987.3850617180555!2d-79.0076773304239!3d-8.148195699492637!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91ad17f026c26c05%3A0x67dcf8c8ce7a17c1!2sCarr.%20Campi%C3%B1a%20de%20Moche%201588%2C%20Moche%2013600!5e0!3m2!1ses-419!2spe!4v1768192888570!5m2!1ses-419!2spe"
+                                style="border:0; width: 100%; height: 100%;" allowfullscreen="" loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
+                        </div>
+                    </div>
+
+                    <!-- Información -->
+                    <div class="text-center lg:text-left order-1 lg:order-2 px-4 lg:px-0">
+                        <h2 class="font-title text-3xl md:text-4xl mb-4 text-black">Recepción & Fiesta</h2>
+                        <div class="w-12 h-0.5 bg-black mx-auto lg:mx-0 mb-6"></div>
+
+                        <p class="font-script text-3xl text-gray-600 mb-2">Restaurante Sol y Fiesta</p>
+                        <p class="font-body text-gray-500 mb-8 leading-relaxed text-sm md:text-base">
+                            Después del "sí, acepto", celebremos juntos con una cena inolvidable,
+                            música y la mejor compañía en la campiña.
+                        </p>
+
+                        <div class="flex flex-col md:flex-row gap-4 md:gap-6 mb-8 justify-center lg:justify-start">
+                            <div class="flex items-center gap-3 text-sm text-gray-800 justify-center lg:justify-start">
+                                <i class="fa-solid fa-wine-glass text-xl text-gray-600"></i>
+                                <span>7:00 PM</span>
+                            </div>
+                            <div class="flex items-center gap-3 text-sm text-gray-800 justify-center lg:justify-start">
+                                <i class="fa-solid fa-location-dot text-xl text-gray-600"></i>
+                                <span>Carr. Campiña de Moche</span>
+                            </div>
+                        </div>
+
+                        <a href="https://maps.app.goo.gl/NkgkX9KkforXuyTs7" target="_blank"
+                            class="btn-elegant inline-block border border-black text-black px-8 py-3 text-xs uppercase font-bold tracking-widest">
+                            Cómo llegar
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-white text-gray-900 py-12 text-center border-t border-gray-100">
+        <h2 class="font-title text-2xl tracking-[0.2em] mb-4">S & D</h2>
+        <p class="font-script text-2xl text-gray-500 mb-6">Gracias por acompañarnos</p>
+        <p class="text-[10px] text-2xl uppercase tracking-widest">23 . 02 . 2026</p>
+        <p class="text-[8px] mt-8">Diseñado con <i class="fa-solid fa-heart text-xs mx-1"></i> por
+            Jhordanex 🐼</p>
+    </footer>
+
     <script src="app.js"></script>
 
 </body>

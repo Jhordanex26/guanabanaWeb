@@ -1,143 +1,280 @@
-  /* Tipografías Personalizadas */
-  .font-title {
-    font-family: 'Cinzel', serif;
-  }
+/* =========================================
+   1. TIPOGRAFÍAS
+   ========================================= */
+.font-title {
+  font-family: 'Cinzel', serif;
+}
 
-  .font-script {
-    font-family: 'Great Vibes', cursive;
-  }
+.font-script {
+  font-family: 'Great Vibes', cursive;
+}
 
-  .font-body {
-    font-family: 'Montserrat', sans-serif;
-  }
+.font-body {
+  font-family: 'Montserrat', sans-serif;
+}
 
-  /* Animaciones Personalizadas */
-  @keyframes fadeInScale {
-    0% {
-      opacity: 0;
-      transform: scale(0.9);
-    }
+/* =========================================
+   2. UTILIDADES GENERALES
+   ========================================= */
+html {
+  scroll-behavior: smooth;
+}
 
-    100% {
-      opacity: 1;
-      transform: scale(1);
-    }
-  }
+/* Textura de Grano Sutil */
+.bg-grain {
+  position: relative;
+}
 
-  @keyframes slideInLeft {
-    0% {
-      opacity: 0;
-      transform: translateX(-50px);
-    }
+.bg-grain::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 50;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+  opacity: 0.4;
+}
 
-    100% {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
+/* Inputs personalizados */
+.custom-input {
+  border-bottom: 1px solid black;
+  transition: border-color 0.3s;
+}
 
-  @keyframes slideInRight {
-    0% {
-      opacity: 0;
-      transform: translateX(50px);
-    }
+.custom-input:focus {
+  outline: none;
+  border-bottom: 2px solid black;
+}
 
-    100% {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
+/* =========================================
+   3. ANIMACIONES
+   ========================================= */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 1s ease-out;
+}
 
-  @keyframes drawLine {
-    0% {
-      width: 0;
-    }
+.reveal-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
 
-    100% {
-      width: 100px;
-    }
-  }
-
-  .animate-hero-text {
-    animation: fadeInScale 2s ease-out forwards;
-  }
-
-  .animate-s {
-    animation: slideInLeft 1.5s ease-out forwards;
-  }
-
-  .animate-d {
-    animation: slideInRight 1.5s ease-out forwards;
-  }
-
-  .animate-line {
-    animation: drawLine 1.5s ease-out forwards 1s;
-  }
-
-  /* Utilidades de Scroll */
-  html {
-    scroll-behavior: smooth;
-  }
-
-  /* Ocultar elementos para animación al scroll */
-  .reveal-on-scroll {
+@keyframes fadeInScale {
+  0% {
     opacity: 0;
-    transform: translateY(30px);
-    transition: all 1s ease-out;
+    transform: scale(0.9);
   }
 
-  .reveal-on-scroll.visible {
+  100% {
     opacity: 1;
-    transform: translateY(0);
+    transform: scale(1);
+  }
+}
+
+@keyframes slideInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-50px);
   }
 
-  /* Estilo personalizado para inputs */
-  .custom-input {
-    border-bottom: 1px solid black;
-    transition: border-color 0.3s;
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(50px);
   }
 
-  .custom-input:focus {
-    outline: none;
-    border-bottom: 2px solid black;
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes drawLine {
+  0% {
+    width: 0;
   }
 
-  /* --- NUEVOS ESTILOS UX/UI PARA REGALOS --- */
-  .gift-card {
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    border: 1px solid #f3f4f6;
+  100% {
+    width: 100px;
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
   }
 
-  .gift-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-    border-color: #000;
+  50% {
+    transform: translateY(-10px);
   }
 
-  .copy-btn {
-    position: relative;
-    overflow: hidden;
-    transition: all 0.3s ease;
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.animate-hero-text {
+  animation: fadeInScale 2s ease-out forwards;
+}
+
+.animate-s {
+  animation: slideInLeft 1.5s ease-out forwards;
+}
+
+.animate-d {
+  animation: slideInRight 1.5s ease-out forwards;
+}
+
+.animate-line {
+  animation: drawLine 1.5s ease-out forwards 1s;
+}
+
+.animate-fade-in {
+  animation: fadeInScale 2s ease-out forwards;
+}
+
+/* =========================================
+   4. COMPONENTES: POLAROID & ÁLBUM
+   ========================================= */
+.polaroid-container {
+  background-color: white;
+  padding: 12px 12px 40px 12px;
+  /* Padding extra abajo para caption */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: rotate(var(--rotation, 0deg));
+  cursor: zoom-in;
+  position: relative;
+  break-inside: avoid;
+  margin-bottom: 2rem;
+}
+
+/* Efecto Hover Polaroid */
+.polaroid-container:hover {
+  transform: scale(1.05) rotate(0deg) !important;
+  /* Resetea rotación y agranda */
+  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.25);
+  z-index: 20;
+}
+
+.polaroid-container img {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: grayscale(100%);
+  /* B&W por defecto */
+  transition: filter 0.5s ease;
+}
+
+.polaroid-container:hover img {
+  filter: grayscale(0%);
+  /* Color al hover */
+}
+
+.polaroid-caption {
+  position: absolute;
+  bottom: 5px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  font-family: 'Great Vibes', cursive;
+  font-size: 1.5rem;
+  color: #444;
+}
+
+/* Botón Flotante Cámara */
+.floating-camera-btn {
+  animation: float 3s ease-in-out infinite;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Lightbox (Visor) */
+#lightbox {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+#lightbox.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+#lightbox img {
+  max-height: 90vh;
+  max-width: 90vw;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  border: 8px solid white;
+}
+
+/* =========================================
+   6. REPRODUCTOR DE MÚSICA (NUEVO)
+   ========================================= */
+.music-control-btn {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 9999px;
+  background-color: #000;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  z-index: 100;
+  transition: all 0.3s ease;
+  border: 2px solid white;
+}
+
+.music-control-btn:hover {
+  background-color: #333;
+  transform: scale(1.1);
+}
+
+/* Animación de ondas cuando suena la música */
+.music-playing {
+  animation: pulse-border 2s infinite;
+}
+
+@keyframes pulse-border {
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
   }
 
-  .copy-btn::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: 0.5s;
+  70% {
+    box-shadow: 0 0 0 15px rgba(0, 0, 0, 0);
   }
 
-  .copy-btn:hover::after {
-    left: 100%;
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  }
+}
+
+/* Icono girando suavemente si está reproduciendo */
+.music-playing i {
+  animation: spin-slow 8s linear infinite;
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
   }
 
-  /* Patrón de fondo sutil */
-  .bg-pattern {
-    background-color: #ffffff;
-    background-image: radial-gradient(#e5e7eb 1px, transparent 1px);
-    background-size: 20px 20px;
+  to {
+    transform: rotate(360deg);
   }
+}

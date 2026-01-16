@@ -4,8 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nuetra Historia</title>
-    <link rel="icon" href="img/iconPerry.png" type="image/png">
+    <title>Nuestra Historia | Saint & Diana</title>
+    <link rel="icon" href="img/iconPerryAnime.jpg" type="image/png">
+
+    <!-- Enlace al CSS externo -->
+    <link rel="stylesheet" href="styles.css">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -19,47 +22,191 @@
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
-    <!-- SweetAlert2 para Alertas Bonitas (Mejora UX) -->
+
+    <!-- SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
-<body class="bg-white text-gray-900 font-body antialiased overflow-x-hidden">
+<body class="bg-gray-50 text-gray-900 font-body antialiased overflow-x-hidden flex flex-col min-h-screen">
 
-    <section id="romanticismo" class="relative py-24 bg-gray-50 reveal-on-scroll scroll-mt-24">
-        <div class="container mx-auto px-4">
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div class="relative">
-                    <div
-                        class="absolute inset-0 border-2 border-black transform translate-x-4 translate-y-4 hidden md:block">
-                    </div>
-                    <img src="img/imgGuanabanaGuitarra.jpg" alt="Pareja Romántica"
-                        class="w-full grayscale shadow-lg relative z-10">
+    <!-- ENCABEZADO -->
+    <header class="py-12 md:py-16 text-center relative overflow-hidden bg-white border-b border-gray-100">
+        <div class="container mx-auto px-6 relative z-10">
+            <span class="font-script text-4xl text-gray-400 mb-2 block reveal-on-scroll">Recuerdos de nuestra
+                historia</span>
+            <p class="text-gray-500 max-w-xl mx-auto leading-relaxed text-sm italic reveal-on-scroll font-light">
+                "Los momentos pasan, pero las fotografías los hacen eternos."
+            </p>
+        </div>
+    </header>
+
+    <!-- GALERÍA POLAROID SOBRE FONDO "SAVE THE DATE" -->
+    <!-- Nota: 'bg-fixed' crea el efecto parallax, 'bg-cover' ajusta la imagen -->
+    <section class="relative min-h-screen py-20 bg-fixed bg-center bg-cover"> <!-- AQUÍ VA TU FOTO DE FONDO -->
+
+        <!-- Capa oscura para que resalten las polaroids -->
+        <div class="absolute inset-0 bg-black/60"></div>
+
+        <div class="container mx-auto px-4 max-w-6xl relative z-10">
+
+            <!-- Grid Masonry para las 10 Fotos -->
+            <div class="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8 px-2">
+
+                <!-- FOTO 1: Rotación aleatoria -->
+                <div class="polaroid-container reveal-on-scroll" style="--rotation: -2deg;"
+                    onclick="openLightbox(this)">
+                    <img src="img/album3.jpg" alt="Primer Encuentro">
+                    <div class="polaroid-caption">Un <b>sí</b> para siempre</div>
                 </div>
-                <div class="text-center md:text-left">
-                    <h3 class="font-title text-3xl mb-4">Nuestro Amor</h3>
-                    <p class="text-gray-600 mb-8 italic text-lg">
-                        "El amor es paciente y bondadoso..." <br>
-                        Cada día que pasa es un paso más cerca de nuestra eternidad juntos.
-                    </p>
 
-                    <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200 inline-block w-full">
-                        <p class="text-xs uppercase tracking-widest mb-4 text-gray-500">Faltan:</p>
-                        <div class="flex justify-center md:justify-around gap-4 text-center" id="countdown">
-                            <div><span class="block text-3xl font-bold font-title" id="days">00</span><span
-                                    class="text-xs">Días</span></div>
-                            <div><span class="block text-3xl font-bold font-title" id="hours">00</span><span
-                                    class="text-xs">Hs</span></div>
-                            <div><span class="block text-3xl font-bold font-title" id="minutes">00</span><span
-                                    class="text-xs">Min</span></div>
-                            <div><span class="block text-3xl font-bold font-title" id="seconds">00</span><span
-                                    class="text-xs">Seg</span></div>
-                        </div>
-                    </div>
+                <!-- FOTO 2 -->
+                <div class="polaroid-container reveal-on-scroll" style="--rotation: 3deg;" onclick="openLightbox(this)">
+                    <img src="img/album5.jpg" alt="Viajes">
+                    <div class="polaroid-caption">Un Lugar Especial</div>
+                </div>
+
+                <!-- FOTO 3 -->
+                <div class="polaroid-container reveal-on-scroll" style="--rotation: -1deg;"
+                    onclick="openLightbox(this)">
+                    <img src="img/album10.JPG" alt="Compromiso">
+                    <div class="polaroid-caption">Amor puro</div>
+                </div>
+
+                <!-- FOTO 4 -->
+                <div class="polaroid-container reveal-on-scroll" style="--rotation: 2deg;" onclick="openLightbox(this)">
+                    <img src="img/album7.jpg" alt="Risas"
+                        onerror="this.src='https://images.unsplash.com/photo-1511285560982-1351cdeb9821?auto=format&fit=crop&q=80&w=600'">
+                    <div class="polaroid-caption">Momentos Divertidos</div>
+                </div>
+
+                <!-- FOTO 5 -->
+                <div class="polaroid-container reveal-on-scroll" style="--rotation: -3deg;"
+                    onclick="openLightbox(this)">
+                    <img src="img/album4.JPG" alt="Familia"
+                        onerror="this.src='https://images.unsplash.com/photo-1529634806980-85c3dd6d62f0?auto=format&fit=crop&q=80&w=600'">
+                    <div class="polaroid-caption">Lo que mas disfrutamos hacer juntos</div>
+                </div>
+
+                <!-- FOTO 6 -->
+                <div class="polaroid-container reveal-
+            on-scroll" style="--rotation: 1deg;" onclick="openLightbox(this)">
+                    <img src="img/album9.JPG" alt="Mascota"
+                        onerror="this.src='https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&q=80&w=600'">
+                    <div class="polaroid-caption">Aventuras Juntos</div>
+                </div>
+
+                <!-- FOTO 7 -->
+                <div class="polaroid-container reveal-on-scroll" style="--rotation: -2deg;"
+                    onclick="openLightbox(this)">
+                    <img src="img/album1.jpg" alt="Citas"
+                        onerror="this.src='https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&q=80&w=600'">
+                    <div class="polaroid-caption">Bendiciones de Jehová</div>
+                </div>
+
+                <!-- FOTO 8 -->
+                <div class="polaroid-container reveal-on-scroll" style="--rotation: 4deg;" onclick="openLightbox(this)">
+                    <img src="img/album15.jpg" alt="Casual"
+                        onerror="this.src='https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&q=80&w=600'">
+                    <div class="polaroid-caption">La Familia que Jehová nos regaló</div>
+                </div>
+
+                <!-- FOTO 9 (Nueva) -->
+                <div class="polaroid-container reveal-on-scroll" style="--rotation: -1deg;"
+                    onclick="openLightbox(this)">
+                    <img src="img/album6.JPG" alt="Playa"
+                        onerror="this.src='https://images.unsplash.com/photo-1510525009512-ad7fc13eefab?auto=format&fit=crop&q=80&w=600'">
+                    <div class="polaroid-caption">Nuestro Feliz Compromiso</div>
+                </div>
+
+                <!-- FOTO 10 (Nueva) -->
+                <div class="polaroid-container reveal-on-scroll" style="--rotation: 3deg;" onclick="openLightbox(this)">
+                    <img src="img/album14.jpeg" alt="Beso"
+                        onerror="this.src='https://images.unsplash.com/photo-1522673607200-1645062cd958?auto=format&fit=crop&q=80&w=600'">
+                    <div class="polaroid-caption">Construyendo nuestro futuro</div>
+                </div>
+
+                <div class="polaroid-container reveal-on-scroll" style="--rotation: 3deg;" onclick="openLightbox(this)">
+                    <img src="img/album11.JPG" alt="Beso"
+                        onerror="this.src='https://images.unsplash.com/photo-1522673607200-1645062cd958?auto=format&fit=crop&q=80&w=600'">
+                    <div class="polaroid-caption">De la mano siempre...</div>
+                </div>
+
+                <div class="polaroid-container reveal-on-scroll" style="--rotation: -1deg;"
+                    onclick="openLightbox(this)">
+                    <img src="img/album12.JPG" alt="Playa"
+                        onerror="this.src='https://images.unsplash.com/photo-1510525009512-ad7fc13eefab?auto=format&fit=crop&q=80&w=600'">
+                    <div class="polaroid-caption">Momentos Dulces</div>
+                </div>
+                <!-- <div class="polaroid-container reveal-on-scroll" style="--rotation: 2deg;" onclick="openLightbox(this)">
+                    <img src="img/album6.jpg" alt="Risas"
+                        onerror="this.src='https://images.unsplash.com/photo-1511285560982-1351cdeb9821?auto=format&fit=crop&q=80&w=600'">
+                    <div class="polaroid-caption">Cómplices</div>
+                </div> -->
+            </div>
+        </div>
+    </section>
+
+    <!-- COUNTDOWN SECTION -->
+    <section class="py-16 bg-white border-t border-gray-100 reveal-on-scroll mb-20">
+        <div class="container mx-auto px-4 text-center">
+            <h3 class="font-title text-2xl text-gray-800 mb-8 uppercase tracking-widest">Faltan</h3>
+
+            <div class="flex flex-wrap justify-center gap-6 md:gap-12 text-gray-800" id="countdown">
+                <!-- Los JS llenarán esto -->
+                <div class="flex flex-col items-center">
+                    <span class="text-4xl md:text-5xl font-body font-light" id="days">00</span>
+                    <span class="text-[10px] uppercase tracking-widest text-gray-400 mt-2">Días</span>
+                </div>
+                <div class="text-3xl font-light text-gray-200 self-center">:</div>
+                <div class="flex flex-col items-center">
+                    <span class="text-4xl md:text-5xl font-body font-light" id="hours">00</span>
+                    <span class="text-[10px] uppercase tracking-widest text-gray-400 mt-2">Horas</span>
+                </div>
+                <div class="text-3xl font-light text-gray-200 self-center">:</div>
+                <div class="flex flex-col items-center">
+                    <span class="text-4xl md:text-5xl font-body font-light" id="minutes">00</span>
+                    <span class="text-[10px] uppercase tracking-widest text-gray-400 mt-2">Min</span>
+                </div>
+                <div class="text-3xl font-light text-gray-200 self-center hidden md:block">:</div>
+                <div class="flex flex-col items-center hidden md:flex">
+                    <span class="text-4xl md:text-5xl font-body font-light" id="seconds">00</span>
+                    <span class="text-[10px] uppercase tracking-widest text-gray-400 mt-2">Seg</span>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- BOTÓN FLOTANTE PARA SUBIR FOTOS -->
+    <div class="fixed bottom-6 right-6 z-40 group">
+        <div
+            class="absolute bottom-full right-0 mb-3 w-48 bg-black text-white text-xs p-2 rounded text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none shadow-lg">
+            ¡Comparte tus fotos!
+            <div class="absolute top-full right-6 -mt-1 border-4 border-transparent border-t-black"></div>
+        </div>
+        <a href="javascript:void(0)" onclick="abrirSubidaFotos()"
+            class="floating-camera-btn bg-black text-white w-14 h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center text-xl md:text-2xl hover:bg-gray-800 transition-colors border-4 border-white shadow-xl">
+            <i class="fa-solid fa-camera"></i>
+        </a>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-black text-white py-8 text-center mt-auto">
+        <p class="font-title text-sm tracking-widest">Saint & Diana</p>
+        <p class="text-[10px] text-gray-500 mt-2">23 . 02 . 2026</p>
+        <p class="text-[8px] mt-8">Diseñado con <i class="fa-solid fa-heart text-xs mx-1"></i> por
+            Jhordanex 🐼</p>
+    </footer>
+
+    <!-- LIGHTBOX MODAL -->
+    <div id="lightbox" class="fixed inset-0 z-[100] bg-black/90 flex items-center justify-center p-4 backdrop-blur-sm"
+        onclick="closeLightbox()">
+        <button
+            class="absolute top-4 right-4 text-white text-4xl hover:text-gray-300 transition focus:outline-none">&times;</button>
+        <img id="lightbox-img" src="" alt="Vista Previa"
+            class="max-h-full max-w-full rounded-sm transform scale-95 transition-transform duration-300"
+            onclick="event.stopPropagation()">
+    </div>
+    <!-- Enlace al JS Externo -->
     <script src="app.js"></script>
 
 </body>

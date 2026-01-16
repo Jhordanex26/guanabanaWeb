@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Regalos</title>
-    <link rel="icon" href="img/iconPerry.png" type="image/png">
+    <link rel="icon" href="img/iconPerryAnime.jpg" type="image/png">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -49,63 +49,113 @@
         <div class="max-w-4xl mx-auto px-6">
 
             <!-- Grid de Tarjetas -->
-            <div class="grid md:grid-cols-2 gap-8 md:gap-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 items-stretch">
 
-                <!-- OPCIÓN 1: BCP -->
-                <div class="gift-card bg-white p-8 rounded-xl shadow-sm text-center relative group reveal-on-scroll">
+                <!-- TARJETA 1: BCP -->
+                <div
+                    class="gift-card bg-white p-6 lg:p-8 rounded-xl shadow-sm text-center relative group reveal-on-scroll h-full">
+
                     <div
-                        class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg">
+                        class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg z-10">
                         <i class="fa-solid fa-building-columns text-lg"></i>
                     </div>
 
-                    <h3 class="mt-6 font-title text-xl font-semibold mb-1">Depósito Bancario</h3>
-                    <p class="text-xs text-gray-500 uppercase tracking-widest mb-6">Cuenta BCP Ahorros</p>
+                    <div class="mt-4">
+                        <h3 class="mt-4 font-title text-xl font-semibold mb-1">Depósito Bancario</h3>
+                        <p class="text-xs text-gray-500 uppercase tracking-widest mb-6">Cuenta BCP Ahorros</p>
 
-                    <div class="bg-gray-50 p-4 rounded-lg border border-gray-100 mb-6">
-                        <p class="font-mono text-lg md:text-xl font-bold text-gray-800 tracking-wider select-all"
-                            id="text-bcp">
-                            57094853271037
-                        </p>
+                        <div class="bg-gray-50 p-4 rounded-lg border border-gray-100 mb-6 break-words">
+                            <p class="font-mono text-lg font-bold text-gray-800 tracking-wider select-all mb-2"
+                                id="text-bcp">
+                                57094853271037
+                            </p>
+                            <div class="w-full h-px bg-gray-200 my-2"></div>
+                            <p class="font-body text-xs text-gray-500 uppercase">Titular:</p>
+                            <p class="font-mono text-sm md:text-base font-semibold text-gray-700 select-all">
+                                Saint Manuel Herrera Rojas
+                            </p>
+                        </div>
                     </div>
 
-                    <!-- Botón con referencia 'this' para cambiar el texto al hacer click -->
                     <button onclick="copiarAlPortapapeles('57094853271037', 'Cuenta BCP', this)"
-                        class="copy-btn w-full bg-black text-white py-3 text-xs uppercase font-bold tracking-widest hover:bg-gray-800 rounded transition duration-300 flex items-center justify-center gap-2">
+                        class="copy-btn w-full bg-black text-white py-3 text-xs uppercase font-bold tracking-widest hover:bg-gray-800 rounded transition duration-300 flex items-center justify-center gap-2 mt-auto">
                         <i class="fa-regular fa-copy"></i> <span>Copiar Cuenta</span>
                     </button>
                 </div>
 
-                <!-- OPCIÓN 2: YAPE / PLIN -->
-                <div class="gift-card bg-white p-8 rounded-xl shadow-sm text-center relative group reveal-on-scroll"
+                <!-- TARJETA 2: YAPE / PLIN -->
+
+                <div class="gift-card bg-white p-6 lg:p-8 rounded-xl shadow-sm text-center relative group reveal-on-scroll h-full"
                     style="transition-delay: 100ms;">
                     <div
-                        class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-purple-600 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg">
+                        class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-purple-600 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg z-10">
                         <i class="fa-solid fa-mobile-screen text-lg"></i>
                     </div>
 
-                    <h3 class="mt-6 font-title text-xl font-semibold mb-1">Billetera Digital</h3>
-                    <p class="text-xs text-gray-500 uppercase tracking-widest mb-6">Yape / Plin</p>
+                    <div class="mt-4">
+                        <h3 class="mt-4 font-title text-xl font-semibold mb-1">Billetera Digital</h3>
+                        <p class="text-xs text-gray-500 uppercase tracking-widest mb-6">Yape / Plin</p>
 
-                    <!-- Simulación de QR (Placeholder visual) -->
-                    <div onclick="openQrModal()"
-                        class="cursor-pointer w-32 h-32 mx-auto bg-white rounded-lg mb-4 flex items-center justify-center relative overflow-hidden group-hover:scale-105 transition-transform duration-300 border border-gray-100 ring-2 ring-transparent hover:ring-purple-200"
-                        title="Clic para ampliar">
-                        <img src="img/codigoQrYape.png" onerror="this.src='img/codigoQrYape.jpg'" alt="QR Yape"
-                            class="w-full h-full object-contain p-1 pointer-events-none">
-                        <!-- Icono pequeño de lupa para indicar que se puede ampliar -->
-                        <div
-                            class="absolute bottom-1 right-1 bg-white rounded-full p-1 shadow-sm opacity-0 group-hover:opacity-100 transition-opacity">
-                            <i class="fa-solid fa-magnifying-glass-plus text-xs text-purple-600"></i>
+                        <!-- QR Interactivo -->
+                        <div onclick="openQrModal()"
+                            class="cursor-pointer w-32 h-32 mx-auto bg-white rounded-lg mb-4 flex items-center justify-center relative overflow-hidden group-hover:scale-105 transition-transform duration-300 border border-gray-100 ring-2 ring-transparent hover:ring-purple-200"
+                            title="Clic para ampliar">
+                            <img src="img/codigoQrYape.png" onerror="this.src='img/codigoQrYape.jpg'" alt="QR Yape"
+                                class="w-full h-full object-contain p-1 pointer-events-none">
+                            <div
+                                class="absolute bottom-1 right-1 bg-white rounded-full p-1 shadow-sm opacity-0 group-hover:opacity-100 transition-opacity">
+                                <i class="fa-solid fa-magnifying-glass-plus text-xs text-purple-600"></i>
+                            </div>
+                        </div>
+
+                        <div class="mb-6">
+                            <p class="font-mono text-xl font-bold text-gray-800 select-all leading-none">924120366</p>
+                            <p class="text-sm text-gray-500 mt-1 select-all">Saint H.</p>
                         </div>
                     </div>
 
-                    <p class="font-mono text-xl font-bold text-gray-800 mb-6 select-all" id="text-yape">924 120 366</p>
-
-                    <!-- Botón con referencia 'this' -->
-                    <button onclick="copiarAlPortapapeles('924 120 366', 'Número de Celular', this)"
-                        class="copy-btn w-full bg-purple-600 text-white py-3 text-xs uppercase font-bold tracking-widest hover:bg-purple-700 rounded transition duration-300 flex items-center justify-center gap-2">
+                    <button onclick="copiarAlPortapapeles('924120366', 'Número de Celular', this)"
+                        class="copy-btn w-full bg-purple-600 text-white py-3 text-xs uppercase font-bold tracking-widest hover:bg-purple-700 rounded transition duration-300 flex items-center justify-center gap-2 mt-auto">
                         <i class="fa-regular fa-copy"></i> <span>Copiar Número</span>
                     </button>
+                </div>
+
+                <!-- TARJETA 3: REGALOS FÍSICOS -->
+                <div class="gift-card bg-white p-6 lg:p-8 rounded-xl shadow-sm text-center relative group reveal-on-scroll h-full"
+                    style="transition-delay: 200ms;">
+                    <!-- Icono Diferente -->
+                    <div
+                        class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-800 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg z-10">
+                        <i class="fa-solid fa-gift text-lg"></i>
+                    </div>
+
+                    <div class="mt-4 flex flex-col h-full">
+                        <h3 class="mt-4 font-title text-xl font-semibold mb-1">Regalos Físicos</h3>
+                        <p class="text-xs text-gray-500 uppercase tracking-widest mb-4">Recepción</p>
+
+                        <!-- Mapa pequeño dentro de la card -->
+                        <div
+                            class="card-map-frame w-full h-40 bg-gray-100 rounded-lg mb-4 overflow-hidden border border-gray-200 flex-shrink-0">
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d987.5574566782983!2d-79.02463903044281!3d-8.078027299496872!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91ad3dfeb31488ad%3A0xd9a44cc9c73260f3!2s21%20De%20Octubre%201855%2C%20Florencia%20de%20Mora%2013002!5e0!3m2!1ses-419!2spe!4v1768443131253!5m2!1ses-419!2spe"
+                                style="border:0;" allowfullscreen="" loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
+                        </div>
+
+                        <div class="text-left mb-6 text-sm text-gray-600 space-y-2 px-2 flex-grow">
+                            <p class="font-bold text-gray-800"><i class="fa-solid fa-shop mr-2"></i>Familia Herrera</p>
+                            <p><i class="fa-solid fa-location-dot mr-2"></i>Florencia de Mora, calle 21 de Octubre 1821
+                            </p>
+                            <p><i class="fa-solid fa-user mr-2"></i>Contacto : 924120366</p>
+
+                        </div>
+
+                        <a href="https://maps.app.goo.gl/HcrykYbksYPPFSQdA" target="_blank"
+                            class="btn-elegant w-full mt-auto block border border-black text-black bg-transparent hover:bg-black hover:text-white py-3 text-xs uppercase font-bold tracking-widest rounded transition duration-300 flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-map-location-dot"></i> <span>Cómo llegar</span>
+                        </a>
+                    </div>
                 </div>
 
             </div>
@@ -114,7 +164,10 @@
             <div class="mt-16 text-center reveal-on-scroll">
                 <i class="fa-solid fa-envelope-open-text text-3xl text-gray-300 mb-4"></i>
                 <p class="font-script text-2xl text-gray-500">¡Gracias por ser parte de nuestra historia!</p>
+                <p class="text-[8px] mt-8">Diseñado con <i class="fa-solid fa-heart text-xs mx-1"></i> por
+                    Jhordanex 🐼</p>
             </div>
+
         </div>
         <!-- MODAL DE QR (NUEVO) -->
         <div id="qrModal" class="fixed inset-0 z-[100] hidden" aria-labelledby="modal-title" role="dialog"
@@ -155,7 +208,7 @@
                                 </div>
                             </div>
 
-                            <p class="font-mono text-2xl font-bold text-gray-800 tracking-wider">987 654 321</p>
+                            <p class="font-mono text-2xl font-bold text-gray-800 tracking-wider">924120366</p>
                             <p class="text-xs text-gray-500 mt-2 font-body italic">"Gracias por el detalle"</p>
                         </div>
 
@@ -172,6 +225,8 @@
             </div>
         </div>
     </section>
+
+
     <script src="app.js"></script>
 
 </body>

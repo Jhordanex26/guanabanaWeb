@@ -5,9 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Saint y Diana</title>
-    <link rel="icon" href="img/iconPerry.png" type="image/png">
-
-
+    <link rel="icon" href="img/iconPerryAnime.jpg" type="image/png">
+    <link rel="stylesheet" href="styles.css">
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
@@ -20,100 +19,203 @@
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
-    <!-- SweetAlert2 para Alertas Bonitas (Mejora UX) -->
+
+    <!-- SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 
-<body class="bg-white text-gray-900 font-body antialiased overflow-x-hidden">
+<body class="bg-white text-gray-900 font-body antialiased overflow-x-hidden bg-grain">
 
     <!-- HERO SECTION -->
     <header class="relative h-screen w-full overflow-hidden flex items-center justify-center bg-black">
         <div class="absolute inset-0 z-0">
-            <img src="img/guanabanasFacheros.jpg" alt="Pareja" class="w-full h-full object-cover opacity-60">
-            <div class="absolute inset-0 bg-black/40"></div>
+            <!-- 
+                AJUSTE DE POSICIÓN: object-[50%_25%] 
+                Esto centra la imagen horizontalmente (50%) y enfoca el 25% superior verticalmente.
+                Ideal para que las cabezas no se corten si están arriba.
+            -->
+            <img src="img/preboda saint y diana3.JPG" alt="Pareja"
+                class="w-full h-full object-cover object-[60%_35%] opacity-60 animate-fade-in">
+            <div class="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60"></div>
         </div>
 
         <div class="relative z-10 text-white text-center flex flex-col items-center justify-center p-4">
-            <div class="flex items-center justify-center gap-4 md:gap-8 mb-4">
-                <span class="font-title text-8xl md:text-9xl animate-s inline-block">S</span>
-                <span class="font-script text-4xl md:text-6xl text-gray-300 mt-4">&</span>
-                <span class="font-title text-8xl md:text-9xl animate-d inline-block">D</span>
+            <!-- Iniciales decorativas -->
+            <div class="flex items-center justify-center gap-6 md:gap-12 mb-6 opacity-0 animate-hero-text"
+                style="animation-delay: 0.2s;">
+                <span class="font-title text-7xl md:text-9xl border-b border-white/50 pb-2">S</span>
+                <span class="font-script text-4xl md:text-5xl text-gray-300 mt-4">&</span>
+                <span class="font-title text-7xl md:text-9xl border-b border-white/50 pb-2">D</span>
             </div>
 
-            <div class="h-1 bg-white mb-6 animate-line"></div>
-
-            <p class="font-title text-xl md:text-2xl tracking-[0.2em] uppercase animate-hero-text animation-delay-500">
+            <p class="font-title text-xl md:text-2xl tracking-[0.3em] uppercase opacity-0 animate-hero-text"
+                style="animation-delay: 0.8s;">
                 Saint & Diana
             </p>
-            <p class="mt-4 font-body font-light text-sm tracking-widest animate-hero-text">
-                23 . 02 . 2026
-            </p>
+
+            <div class="mt-6 flex items-center gap-4 text-xs md:text-sm tracking-widest opacity-0 animate-hero-text"
+                style="animation-delay: 1.2s;">
+                <span class="border-t border-white w-12"></span>
+                <span>23 . 02 . 2026</span>
+                <span class="border-t border-white w-12"></span>
+            </div>
         </div>
 
-        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-white animate-bounce cursor-pointer"
+        <!-- Indicador de Scroll -->
+        <!-- <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-white animate-bounce cursor-pointer z-20 opacity-70 hover:opacity-100 transition"
             onclick="document.getElementById('intro').scrollIntoView()">
-            <i class="fa-solid fa-chevron-down text-2xl"></i>
-        </div>
+            <span class="text-[10px] uppercase tracking-widest mb-2 block">Bienvenidos</span>
+            <i class="fa-solid fa-chevron-down text-xl"></i>
+        </div> -->
     </header>
+
     <!-- MENÚ DE NAVEGACIÓN STICKY -->
-    <nav class="py-4 bg-black text-white sticky top-0 z-50 shadow-xl transition-all duration-300" id="navbar">
+    <nav class="py-4 bg-white/95 backdrop-blur-md text-black sticky top-0 z-40 shadow-sm transition-all duration-300 border-b border-gray-100"
+        id="navbar">
         <div class="container mx-auto px-4">
             <div class="flex justify-around items-center max-w-2xl mx-auto">
-                <a href="/nuestraHistoria" class="flex flex-col items-center group hover:text-gray-300 transition">
-                    <i class="fa-regular fa-heart text-xl md:text-2xl mb-1"></i>
-                    <span class="text-[10px] md:text-xs uppercase tracking-widest">Historia</span>
+                <a href="/nuestraHistoria" class="flex flex-col items-center group hover:text-gray-500 transition">
+                    <i class="fa-regular fa-heart text-xl mb-1"></i>
+                    <span class="text-[10px] uppercase tracking-widest">Historia</span>
                 </a>
-                <a href="/confirmarAsistencia" class="flex flex-col items-center group hover:text-gray-300 transition">
-                    <i class="fa-solid fa-check text-xl md:text-2xl mb-1"></i>
-                    <span class="text-[10px] md:text-xs uppercase tracking-widest">Asistencia</span>
+                <!-- <a href="/fotos" class="flex flex-col items-center group hover:text-gray-500 transition">
+                    <i class="fa-solid fa-check text-xl mb-1"></i>
+                    <span class="text-[10px] uppercase tracking-widest">Asistencia</span>
+                </a> -->
+                <a href="/ubicacion" class="flex flex-col items-center group hover:text-gray-500 transition">
+                    <i class="fa-solid fa-location-dot text-xl mb-1"></i>
+                    <span class="text-[10px] uppercase tracking-widest">Mapa</span>
                 </a>
-                <a href="/ubicacion" class="flex flex-col items-center group hover:text-gray-300 transition">
-                    <i class="fa-solid fa-location-dot text-xl md:text-2xl mb-1"></i>
-                    <span class="text-[10px] md:text-xs uppercase tracking-widest">Mapa</span>
-                </a>
-                <a href="/regalos" class="flex flex-col items-center group hover:text-gray-300 transition">
-                    <i class="fa-solid fa-gift text-xl md:text-2xl mb-1"></i>
-                    <span class="text-[10px] md:text-xs uppercase tracking-widest">Regalos</span>
+                <a href="/regalos" class="flex flex-col items-center group hover:text-gray-500 transition">
+                    <i class="fa-solid fa-gift text-xl mb-1"></i>
+                    <span class="text-[10px] uppercase tracking-widest">Regalos</span>
                 </a>
             </div>
         </div>
     </nav>
+
     <!-- INTRODUCCIÓN -->
-    <section id="intro" class="py-20 px-6 max-w-4xl mx-auto text-center reveal-on-scroll">
-        <p class="font-script text-4xl text-gray-500 mb-6">Nos casamos</p>
-        <h2 class="font-title text-3xl md:text-4xl mb-8 leading-relaxed">
-            Con la bendición de Jehová y el amor de nuestros corazones.
-        </h2>
-        <div class="bg-gray-100 p-8 rounded-lg shadow-sm border-l-4 border-black inline-block">
-            <p class="italic text-gray-700 text-lg font-light">
-                "Y una cuerda triple* no se rompe fácilmente."
-            </p>
-            <p class="mt-2 font-bold text-sm uppercase tracking-wide">- Eclesiastés 4:12</p>
+    <section id="intro" class="py-24 px-6 max-w-3xl mx-auto text-center">
+        <div class="mb-10 flex justify-center">
+            <img src="https://img.icons8.com/ios/50/000000/wedding-rings.png" alt="Rings" class="w-12 opacity-50" />
         </div>
-        <p class="mt-10 text-gray-600 leading-7">
-            Queremos compartir este momento tan especial con las personas que amamos.
-            Acompáñanos a celebrar nuestra unión.
+
+        <p class="font-script text-4xl md:text-5xl text-gray-500 mb-6">¡Nos Casamos!</p>
+
+        <h2 class="font-title text-2xl md:text-4xl mb-10 leading-relaxed uppercase tracking-wide text-gray-800">
+            Con la bendición de Jehová <br>y el amor de nuestros corazones
+        </h2>
+
+        <div class="relative py-8 px-10 border-y border-gray-200">
+            <i
+                class="fa-solid fa-quote-left absolute -top-3 left-1/2 transform -translate-x-1/2 bg-white px-2 text-gray-300"></i>
+            <p class="italic text-gray-600 text-lg md:text-xl font-light font-title">
+                "Y una cuerda triple no se rompe fácilmente."
+            </p>
+            <p class="mt-4 font-bold text-xs uppercase tracking-widest text-black">- Eclesiastés 4:12 -</p>
+        </div>
+
+        <p class="mt-12 text-gray-500 leading-8 font-light text-sm md:text-base max-w-2xl mx-auto">
+            Hemos decidido unir nuestras vidas para siempre y queremos compartir la alegría
+            de este nuevo comienzo con las personas que más amamos.
         </p>
     </section>
 
+    <!-- CÓDIGO DE VESTIMENTA (NUEVO APARTADO) -->
+    <!-- CÓDIGO DE VESTIMENTA (ACTUALIZADO CON BADGES) -->
+    <section class="py-20 bg-black text-white relative reveal-on-scroll">
+        <div class="container mx-auto px-6 text-center max-w-4xl">
 
+            <div
+                class="inline-block border border-gray-700 p-8 md:p-12 rounded-sm relative bg-gray-900/50 backdrop-blur-sm shadow-2xl">
+                <!-- Decoración de esquinas -->
+                <div class="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-white"></div>
+                <div class="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-white"></div>
+                <div class="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-white"></div>
+                <div class="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-white"></div>
 
-    <!-- FOOTER -->
-    <!-- <footer class="relative h-[50vh] bg-gray-100 flex items-end justify-center">
-        <img src="img/guanabanasFacheros.jpg" alt="Final"
-            class="absolute inset-0 w-full h-full object-cover grayscale opacity-80">
-        <div class="relative z-10 text-center pb-16 px-4">
-            <h2 class="font-script text-6xl text-white drop-shadow-lg mb-4">Gracias</h2>
+                <h3 class="font-title text-2xl md:text-3xl uppercase tracking-widest mb-2">Código de Vestimenta</h3>
+                <p class="font-script text-2xl text-gray-400 mb-10">Formal</p>
+
+                <div class="flex justify-center gap-16 mb-10 text-gray-300">
+                    <div class="flex flex-col items-center group transition duration-300 hover:text-white">
+                        <div
+                            class="w-16 h-16 rounded-full border border-gray-600 flex items-center justify-center mb-3 group-hover:border-white transition-all">
+                            <i class="fa-solid fa-person-dress text-3xl"></i>
+                        </div>
+                        <span class="text-xs uppercase tracking-widest">Damas</span>
+                    </div>
+                    <div class="flex flex-col items-center group transition duration-300 hover:text-white">
+                        <div
+                            class="w-16 h-16 rounded-full border border-gray-600 flex items-center justify-center mb-3 group-hover:border-white transition-all">
+                            <i class="fa-solid fa-user-tie text-3xl"></i>
+                        </div>
+                        <span class="text-xs uppercase tracking-widest">Caballeros</span>
+                    </div>
+                </div>
+
+                <!-- NOTA DE COLORES RESERVADOS -->
+                <div class="bg-white/5 border border-white/10 p-6 rounded relative overflow-hidden">
+                    <div class="relative z-10">
+
+                        <p class="text-gray-300 font-light italic text-sm md:text-base mb-6 leading-relaxed">
+                            "Para este día tan especial, les agradecemos amablemente evitar los colores <strong
+                                class="text-white font-normal border-b border-gray-600 pb-0.5">Blanco y Negro</strong>,
+                            reservados exclusivamente para la novia."
+                        </p>
+
+                        <!-- BADGES INTERACTIVOS -->
+                        <div class="flex justify-center items-center gap-8">
+
+                            <!-- Badge Blanco -->
+                            <div class="group relative flex flex-col items-center cursor-help">
+                                <div
+                                    class="w-10 h-10 rounded-full bg-white border-2 border-gray-200 shadow-[0_0_15px_rgba(255,255,255,0.2)] transform transition-all duration-300 group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(255,255,255,0.4)] flex items-center justify-center relative">
+                                    <!-- Icono prohibido al hover -->
+                                    <i
+                                        class="fa-solid fa-ban text-red-500/0 group-hover:text-red-500/90 text-xl transition-all duration-300 absolute"></i>
+                                </div>
+                                <!-- Tooltip -->
+                                <span
+                                    class="absolute -top-8 opacity-0 group-hover:opacity-100 transition-all duration-300 text-[10px] uppercase tracking-widest bg-white text-black px-2 py-1 rounded font-bold shadow-lg transform translate-y-2 group-hover:translate-y-0">
+                                    Reservado
+                                </span>
+                            </div>
+
+                            <!-- Badge Negro -->
+                            <div class="group relative flex flex-col items-center cursor-help">
+                                <div
+                                    class="w-10 h-10 rounded-full bg-black border-2 border-gray-600 shadow-[0_0_15px_rgba(0,0,0,0.5)] transform transition-all duration-300 group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(0,0,0,0.8)] flex items-center justify-center relative">
+                                    <!-- Icono prohibido al hover -->
+                                    <i
+                                        class="fa-solid fa-ban text-red-500/0 group-hover:text-red-500/90 text-xl transition-all duration-300 absolute"></i>
+                                </div>
+                                <!-- Tooltip -->
+                                <span
+                                    class="absolute -top-8 opacity-0 group-hover:opacity-100 transition-all duration-300 text-[10px] uppercase tracking-widest bg-gray-800 text-white px-2 py-1 rounded font-bold shadow-lg transform translate-y-2 group-hover:translate-y-0">
+                                    Reservado
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
-    </footer> -->
+    </section>
 
-    <footer class="bg-black text-white py-8 text-center">
-        <p class="font-title text-sm tracking-widest">Saint & Diana</p>
-        <p class="font-title text-sm tracking-widest">23 . 02 . 2026</p>
-        <p class="text-[10px] text-gray-500 mt-2">By Jhordanex 🐼</p>
+    <!-- FOOTER SIMPLE -->
+    <footer class="bg-white text-gray-900 py-12 text-center border-t border-gray-100">
+        <h2 class="font-title text-2xl tracking-[0.2em] mb-4">S & D</h2>
+        <p class="font-script text-2xl text-gray-500 mb-6">Gracias por acompañarnos</p>
+        <p class="text-[10px] text-2xl uppercase tracking-widest">23 . 02 . 2026</p>
+        <p class="text-[8px] mt-8">Diseñado con <i class="fa-solid fa-heart text-xs mx-1"></i> por
+            Jhordanex 🐼</p>
     </footer>
     <script src="app.js"></script>
+
 </body>
 
 </html>
