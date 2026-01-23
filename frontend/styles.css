@@ -453,3 +453,43 @@ input[type=range].custom-range::-webkit-slider-runnable-track {
     background: rgba(255,255,255,0.3);
     border-radius: 2px;
 }
+/* AGREGA ESTO AL FINAL DE TU STYLES.CSS */
+
+/* Efecto de entrada (Slide Up) */
+.player-hidden-start {
+    transform: translateY(150%);
+    opacity: 0;
+}
+.player-visible-start {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* Transiciones del modo cápsula */
+#mini-player {
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    max-width: 3.5rem; /* Ancho inicial (solo el disco) */
+    overflow: hidden;
+}
+
+/* Cuando tiene la clase 'expanded', crece */
+#mini-player.expanded {
+    max-width: 400px; /* Ancho suficiente para texto y botones */
+    padding-right: 1.5rem; /* Espacio extra al final */
+}
+
+/* Ocultar contenido cuando está cerrado */
+.player-content-hidden {
+    opacity: 0;
+    pointer-events: none;
+    width: 0;
+    margin: 0;
+}
+
+/* Mostrar contenido cuando está abierto */
+.player-content-visible {
+    opacity: 1;
+    pointer-events: auto;
+    width: auto;
+    margin-left: 0.75rem; /* gap-3 eq */
+}
