@@ -1,17 +1,17 @@
 // FRONTEND - app.js
-// Lógica SPA + Mini Reproductor Avanzado + Aleatorio + Autoplay Inteligente
+// Lógica SPA + Mini Reproductor Avanzado + Aleatorio + Autoplay Inteligente (VERSIÓN LIMPIA)
 
 // ==========================================
 // 1. CONFIGURACIÓN Y PLAYLIST
 // ==========================================
 const PLAYLIST = [
-    { title: "I Wanna Be Yours", artist: "Arctic Monkeys", src: "img/wannaBe.mp3" },
-    { title: "Smithereens", artist: "Twenty One Pilots", src: "img/smithereens.mp3" },
-    { title: "Iris", artist: "The Goo Goo Dolls", src: "img/iris.mp3" },
-    { title: "Eres", artist: "Café Tacvba", src: "img/eres.mp3" },
-    { title: "Can't Take My Eyes off You.mp3", artist: "Frankie Valli", src: "img/eyes.mp3" },
-    { title: "Until I Found You.mp3", artist: "Stephen Sanchez ", src: "img/untill.mp3" },
-    { title: "I Think They Call This Love", artist: "Eliot James", src: "img/eliot.mp3" }
+	{ title: "I Wanna Be Yours", artist: "Arctic Monkeys", src: "img/wannaBe.mp3" },
+	{ title: "Smithereens", artist: "Twenty One Pilots", src: "img/smithereens.mp3" },
+	{ title: "Iris", artist: "The Goo Goo Dolls", src: "img/iris.mp3" },
+	{ title: "Eres", artist: "Café Tacvba", src: "img/eres.mp3" },
+	{ title: "Can't Take My Eyes off You", artist: "Frankie Valli", src: "img/eyes.mp3" },
+	{ title: "Until I Found You", artist: "Stephen Sanchez", src: "img/untill.mp3" },
+	{ title: "I Think They Call This Love", artist: "Eliot James", src: "img/eliot.mp3" }
 ];
 
 let globalAudio = new Audio();
@@ -21,54 +21,49 @@ let isScrolling = false;
 let scrollTimeout;
 
 // ==========================================
-// 2. INICIALIZACIÓN (MODIFICADO PARA ALEATORIO)
+// 2. INICIALIZACIÓN
 // ==========================================
 document.addEventListener('DOMContentLoaded', () => {
 
-    // 1. LÓGICA ALEATORIA SIEMPRE:
-    // Generamos un número aleatorio entre 0 y el total de canciones
-    currentTrackIndex = Math.floor(Math.random() * PLAYLIST.length);
+	// 1. Aleatoriedad
+	currentTrackIndex = Math.floor(Math.random() * PLAYLIST.length);
 
-    // Forzamos que empiece desde el segundo 0
-    globalAudio.src = PLAYLIST[currentTrackIndex].src;
-    globalAudio.currentTime = 0;
+	// 2. Configurar Audio
+	if (PLAYLIST.length > 0) {
+		globalAudio.src = PLAYLIST[currentTrackIndex].src;
+		globalAudio.currentTime = 0;
+	}
 
-    // Limpiamos el localStorage antiguo para que no interfiera
-    localStorage.removeItem('bgMusicTime');
-    localStorage.setItem('currentTrackIndex', currentTrackIndex);
+	// 3. Limpieza de estado
+	localStorage.removeItem('bgMusicTime');
+	localStorage.setItem('currentTrackIndex', currentTrackIndex);
 
-    setupPersistentPlayer();
-    initPageScripts();
-    enableSeamlessNavigation();
-    setupScrollDetection();
+	// 4. Iniciar Módulos
+	setupPersistentPlayer();
+	initPageScripts();
+	enableSeamlessNavigation();
+	setupScrollDetection();
 
-    // Eventos de Audio Globales
-    globalAudio.addEventListener('ended', nextTrack); // Al terminar, pasa a la siguiente
-    globalAudio.addEventListener('timeupdate', updateProgressBar);
+	// 5. Eventos Globales Audio
+	globalAudio.addEventListener('ended', nextTrack);
+	globalAudio.addEventListener('timeupdate', updateProgressBar);
 });
 
 // ==========================================
 // 3. SISTEMA DE REPRODUCTOR (UI & LOGIC)
 // ==========================================
-
-// ==========================================
-// 3. SISTEMA DE REPRODUCTOR (UI & LOGIC) - MEJORADO
-// ==========================================
-
 function setupPersistentPlayer() {
-    // Si ya existe, actualizamos UI y salimos
-    if (document.getElementById('mini-player-container')) {
-        updatePlayerUI(isMusicPlaying);
-        return;
-    }
+	if (document.getElementById('mini-player-container')) {
+		updatePlayerUI(isMusicPlaying);
+		return;
+	}
 
-    // Crear Estructura DOM
-    const playerContainer = document.createElement('div');
-    playerContainer.id = 'mini-player-container';
-    // Agregamos 'player-hidden-start' para que empiece invisible y abajo
-    playerContainer.className = 'fixed bottom-4 left-4 z-50 flex flex-col items-start gap-2 player-hidden-start transition-all duration-1000 ease-out';
+	const playerContainer = document.createElement('div');
+	playerContainer.id = 'mini-player-container';
+	// Empieza invisible (player-hidden-start)
+	playerContainer.className = 'fixed bottom-4 left-4 z-50 flex flex-col items-start gap-2 player-hidden-start transition-all duration-1000 ease-out';
 
-    playerContainer.innerHTML = `
+	playerContainer.innerHTML = `
         <div id="playlist-panel" class="hidden bg-black/80 backdrop-blur-md text-white p-4 rounded-xl w-64 shadow-2xl border border-white/10 mb-2 transform transition-all duration-300 origin-bottom-left scale-95 opacity-0">
             <h4 class="text-xs uppercase tracking-widest text-gray-400 mb-3 border-b border-gray-700 pb-2">Playlist Boda</h4>
             <ul class="space-y-2 max-h-48 overflow-y-auto pr-1 custom-scrollbar text-sm" id="playlist-ul"></ul>
@@ -84,7 +79,6 @@ function setupPersistentPlayer() {
             </div>
 
             <div id="player-controls-wrapper" class="flex items-center player-content-hidden transition-all duration-500 delay-100 overflow-hidden whitespace-nowrap">
-                
                 <div class="flex flex-col min-w-[100px] mr-4 cursor-pointer" onclick="togglePlaylist()">
                     <span id="track-title" class="text-xs font-bold truncate text-white leading-tight max-w-[120px]">Cargando...</span>
                     <span id="track-artist" class="text-[10px] text-gray-400 truncate max-w-[120px]">Música de fondo</span>
@@ -102,314 +96,517 @@ function setupPersistentPlayer() {
         </div>
     `;
 
-    document.body.appendChild(playerContainer);
-    renderPlaylistItems();
+	document.body.appendChild(playerContainer);
+	renderPlaylistItems();
 
-    // EFECTO DE ENTRADA: Esperamos 1 segundo y lo hacemos aparecer
-    setTimeout(() => {
-        playerContainer.classList.remove('player-hidden-start');
-        playerContainer.classList.add('player-visible-start');
-    }, 1000);
+	// Efecto de entrada suave
+	setTimeout(() => {
+		playerContainer.classList.remove('player-hidden-start');
+		playerContainer.classList.add('player-visible-start');
+	}, 1000);
 
-    // Intentar reproducir (Autoplay logic)
-    attemptAutoPlay();
+	attemptAutoPlay();
 }
 
-// NUEVA FUNCIÓN PARA ABRIR/CERRAR EL REPRODUCTOR
 function togglePlayerSize() {
-    const player = document.getElementById('mini-player');
-    const content = document.getElementById('player-controls-wrapper');
-    const playlist = document.getElementById('playlist-panel');
+	const player = document.getElementById('mini-player');
+	const content = document.getElementById('player-controls-wrapper');
+	const playlist = document.getElementById('playlist-panel');
 
-    // Si la playlist está abierta y cerramos el player, cerramos la playlist también
-    if (player.classList.contains('expanded') && !playlist.classList.contains('hidden')) {
-        togglePlaylist(); // Cerrar playlist
-    }
+	if (player.classList.contains('expanded') && !playlist.classList.contains('hidden')) {
+		togglePlaylist();
+	}
 
-    player.classList.toggle('expanded');
+	player.classList.toggle('expanded');
 
-    if (player.classList.contains('expanded')) {
-        // ABRIR
-        content.classList.remove('player-content-hidden');
-        content.classList.add('player-content-visible');
-    } else {
-        // CERRAR
-        content.classList.remove('player-content-visible');
-        content.classList.add('player-content-hidden');
-    }
+	if (player.classList.contains('expanded')) {
+		content.classList.remove('player-content-hidden');
+		content.classList.add('player-content-visible');
+	} else {
+		content.classList.remove('player-content-visible');
+		content.classList.add('player-content-hidden');
+	}
 }
 
-// ... [MANTENER LA FUNCIÓN renderPlaylistItems IGUAL] ...
 function renderPlaylistItems() {
-    const ul = document.getElementById('playlist-ul');
-    if (!ul) return;
-    ul.innerHTML = '';
-    PLAYLIST.forEach((song, index) => {
-        const li = document.createElement('li');
-        li.className = `cursor-pointer p-2 rounded hover:bg-white/10 flex justify-between items-center transition ${index === currentTrackIndex ? 'bg-white/20 text-white font-bold' : 'text-gray-300'}`;
-        li.innerHTML = `
+	const ul = document.getElementById('playlist-ul');
+	if (!ul) return;
+	ul.innerHTML = '';
+	PLAYLIST.forEach((song, index) => {
+		const li = document.createElement('li');
+		li.className = `cursor-pointer p-2 rounded hover:bg-white/10 flex justify-between items-center transition ${index === currentTrackIndex ? 'bg-white/20 text-white font-bold' : 'text-gray-300'}`;
+		li.innerHTML = `
             <div class="flex flex-col">
                 <span>${song.title}</span>
                 <span class="text-[9px] opacity-70">${song.artist}</span>
             </div>
             ${index === currentTrackIndex && isMusicPlaying ? '<i class="fa-solid fa-volume-high text-xs animate-pulse"></i>' : ''}
         `;
-        li.onclick = () => playTrack(index);
-        ul.appendChild(li);
-    });
+		li.onclick = () => playTrack(index);
+		ul.appendChild(li);
+	});
 }
 
-// ... [MANTENER LAS FUNCIONES togglePlay, playTrack, nextTrack, prevTrack, togglePlaylist IGUALES] ...
 function togglePlay(e) {
-    if (e) e.stopPropagation();
-    if (globalAudio.paused) {
-        globalAudio.play().then(() => {
-            isMusicPlaying = true;
-            updatePlayerUI(true);
-        });
-    } else {
-        globalAudio.pause();
-        isMusicPlaying = false;
-        updatePlayerUI(false);
-    }
+	if (e) e.stopPropagation();
+	if (globalAudio.paused) {
+		globalAudio.play().then(() => {
+			isMusicPlaying = true;
+			updatePlayerUI(true);
+		});
+	} else {
+		globalAudio.pause();
+		isMusicPlaying = false;
+		updatePlayerUI(false);
+	}
 }
 
 function playTrack(index) {
-    if (index < 0) index = PLAYLIST.length - 1;
-    if (index >= PLAYLIST.length) index = 0;
-    currentTrackIndex = index;
-    globalAudio.src = PLAYLIST[currentTrackIndex].src;
-    globalAudio.load();
-    globalAudio.play().then(() => {
-        isMusicPlaying = true;
-        updatePlayerUI(true);
-    }).catch(e => console.log("Esperando interacción..."));
+	if (index < 0) index = PLAYLIST.length - 1;
+	if (index >= PLAYLIST.length) index = 0;
+	currentTrackIndex = index;
+	globalAudio.src = PLAYLIST[currentTrackIndex].src;
+	globalAudio.load();
+	globalAudio.play().then(() => {
+		isMusicPlaying = true;
+		updatePlayerUI(true);
+	}).catch(e => console.log("Esperando interacción..."));
 }
 
 function nextTrack() { playTrack(currentTrackIndex + 1); }
 function prevTrack() { playTrack(currentTrackIndex - 1); }
 
 function togglePlaylist() {
-    const panel = document.getElementById('playlist-panel');
-    if (panel.classList.contains('hidden')) {
-        panel.classList.remove('hidden');
-        setTimeout(() => { panel.classList.remove('scale-95', 'opacity-0'); panel.classList.add('scale-100', 'opacity-100'); }, 10);
-    } else {
-        panel.classList.remove('scale-100', 'opacity-100'); panel.classList.add('scale-95', 'opacity-0');
-        setTimeout(() => { panel.classList.add('hidden'); }, 300);
-    }
+	const panel = document.getElementById('playlist-panel');
+	if (panel.classList.contains('hidden')) {
+		panel.classList.remove('hidden');
+		setTimeout(() => { panel.classList.remove('scale-95', 'opacity-0'); panel.classList.add('scale-100', 'opacity-100'); }, 10);
+	} else {
+		panel.classList.remove('scale-100', 'opacity-100'); panel.classList.add('scale-95', 'opacity-0');
+		setTimeout(() => { panel.classList.add('hidden'); }, 300);
+	}
 }
 
 function updatePlayerUI(isPlaying) {
-    const disk = document.getElementById('disk-cover');
-    const playBtn = document.getElementById('play-btn');
-    const title = document.getElementById('track-title');
-    const artist = document.getElementById('track-artist');
+	const disk = document.getElementById('disk-cover');
+	const playBtn = document.getElementById('play-btn');
+	const title = document.getElementById('track-title');
+	const artist = document.getElementById('track-artist');
 
-    const currentSong = PLAYLIST[currentTrackIndex];
-    if (title) title.innerText = currentSong.title;
-    if (artist) artist.innerText = currentSong.artist;
+	const currentSong = PLAYLIST[currentTrackIndex];
+	if (title) title.innerText = currentSong.title;
+	if (artist) artist.innerText = currentSong.artist;
 
-    if (isPlaying && !globalAudio.paused) {
-        disk?.classList.add('animate-spin-slow');
-        disk?.classList.remove('paused-animation');
-        if (playBtn) playBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
-    } else {
-        disk?.classList.add('paused-animation');
-        if (playBtn) playBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
-    }
-    renderPlaylistItems();
+	if (isPlaying && !globalAudio.paused) {
+		disk?.classList.add('animate-spin-slow');
+		disk?.classList.remove('paused-animation');
+		if (playBtn) playBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+	} else {
+		disk?.classList.add('paused-animation');
+		if (playBtn) playBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
+	}
+	renderPlaylistItems();
 }
 
 function updateProgressBar() {
-    const bar = document.getElementById('progress-bar');
-    if (globalAudio.duration && bar) {
-        const percent = (globalAudio.currentTime / globalAudio.duration) * 100;
-        bar.style.width = `${percent}%`;
-    }
+	const bar = document.getElementById('progress-bar');
+	if (globalAudio.duration && bar) {
+		const percent = (globalAudio.currentTime / globalAudio.duration) * 100;
+		bar.style.width = `${percent}%`;
+	}
 }
 
-// ==========================================
-// 4. AUTOPLAY INTELIGENTE (LA CLAVE DE TU PREGUNTA)
-// ==========================================
 function attemptAutoPlay() {
-    // Intentamos reproducir directamente (funciona si el usuario ya interactuó antes con el dominio)
-    const playPromise = globalAudio.play();
-
-    if (playPromise !== undefined) {
-        playPromise.then(() => {
-            // ÉXITO: El navegador permitió el autoplay
-            isMusicPlaying = true;
-            updatePlayerUI(true);
-        }).catch(error => {
-            // BLOQUEADO: El navegador bloqueó el autoplay
-            console.log("Autoplay bloqueado por el navegador. Activando 'Trampa de Primer Click'.");
-            updatePlayerUI(false);
-
-            // TRAMPA MAESTRA:
-            // Escuchamos el PRIMER click, scroll o toque en CUALQUIER parte de la página
-            const unlockAudio = () => {
-                globalAudio.play().then(() => {
-                    isMusicPlaying = true;
-                    updatePlayerUI(true);
-
-                    // Una vez activado, quitamos los "oídos" para no consumir recursos
-                    document.removeEventListener('click', unlockAudio);
-                    document.removeEventListener('touchstart', unlockAudio);
-                    document.removeEventListener('scroll', unlockAudio);
-                    document.removeEventListener('keydown', unlockAudio);
-                });
-            };
-
-            // Ponemos los "sensores" en todo el documento
-            document.addEventListener('click', unlockAudio, { once: true });
-            document.addEventListener('touchstart', unlockAudio, { once: true });
-            document.addEventListener('scroll', unlockAudio, { once: true });
-            document.addEventListener('keydown', unlockAudio, { once: true });
-        });
-    }
+	const playPromise = globalAudio.play();
+	if (playPromise !== undefined) {
+		playPromise.then(() => {
+			isMusicPlaying = true;
+			updatePlayerUI(true);
+		}).catch(error => {
+			console.log("Autoplay bloqueado. Esperando primer click.");
+			updatePlayerUI(false);
+			const unlockAudio = () => {
+				globalAudio.play().then(() => {
+					isMusicPlaying = true;
+					updatePlayerUI(true);
+					document.removeEventListener('click', unlockAudio);
+					document.removeEventListener('touchstart', unlockAudio);
+					document.removeEventListener('scroll', unlockAudio);
+					document.removeEventListener('keydown', unlockAudio);
+				});
+			};
+			document.addEventListener('click', unlockAudio, { once: true });
+			document.addEventListener('touchstart', unlockAudio, { once: true });
+			document.addEventListener('scroll', unlockAudio, { once: true });
+			document.addEventListener('keydown', unlockAudio, { once: true });
+		});
+	}
 }
 
-
 // ==========================================
-// 5. NAVEGACIÓN SPA (MODIFICADO)
+// 4. NAVEGACIÓN SPA & PAGINAS
 // ==========================================
-// ... [MANTENER EL RESTO DEL CÓDIGO DE SPA IGUAL] ...
 function enableSeamlessNavigation() {
-    document.body.addEventListener('click', e => {
-        const link = e.target.closest('a');
-        if (link && link.href.startsWith(window.location.origin) && !link.getAttribute('href').startsWith('#') && !link.getAttribute('href').includes('javascript') && link.target !== '_blank') {
-            e.preventDefault();
-            loadPageContent(link.href);
-        }
-    });
-    window.addEventListener('popstate', () => { loadPageContent(window.location.href, false); });
+	document.body.addEventListener('click', e => {
+		const link = e.target.closest('a');
+		if (link && link.href.startsWith(window.location.origin) && !link.getAttribute('href').startsWith('#') && !link.getAttribute('href').includes('javascript') && link.target !== '_blank') {
+			e.preventDefault();
+			loadPageContent(link.href);
+		}
+	});
+	window.addEventListener('popstate', () => { loadPageContent(window.location.href, false); });
 }
 
 async function loadPageContent(url, pushState = true) {
-    try {
-        document.body.style.opacity = '0.5';
-        const response = await fetch(url);
-        const htmlText = await response.text();
-        const parser = new DOMParser();
-        const newDoc = parser.parseFromString(htmlText, 'text/html');
+	try {
+		document.body.style.opacity = '0.5';
+		const response = await fetch(url);
+		const htmlText = await response.text();
+		const parser = new DOMParser();
+		const newDoc = parser.parseFromString(htmlText, 'text/html');
 
-        document.body.innerHTML = newDoc.body.innerHTML;
-        document.body.className = newDoc.body.className;
-        document.title = newDoc.title;
+		document.body.innerHTML = newDoc.body.innerHTML;
+		document.body.className = newDoc.body.className;
+		document.title = newDoc.title;
 
-        // AL CAMBIAR DE PÁGINA, NO REINICIAMOS LA MÚSICA
-        // Simplemente reconstruimos el reproductor visual
-        setupPersistentPlayer();
+		setupPersistentPlayer();
 
-        if (pushState) window.history.pushState({}, '', url);
-        initPageScripts();
-        document.body.style.opacity = '1';
-        window.scrollTo(0, 0);
-    } catch (error) { window.location.href = url; }
+		if (pushState) window.history.pushState({}, '', url);
+		initPageScripts();
+		document.body.style.opacity = '1';
+		window.scrollTo(0, 0);
+	} catch (error) { window.location.href = url; }
 }
 
-// ... [COPIA AQUÍ LAS FUNCIONES initPageScripts, setupScrollDetection, setupPhotoColorization, etc.] ...
-// (Asegúrate de pegar el resto de funciones auxiliares que tenías en el código anterior: initPageScripts, setupScrollDetection, colorize, lightbox, etc.)
 function setupScrollDetection() {
-    window.addEventListener('scroll', () => {
-        isScrolling = true;
-        clearTimeout(scrollTimeout);
-        scrollTimeout = setTimeout(() => isScrolling = false, 150);
-    }, { passive: true });
+	window.addEventListener('scroll', () => {
+		isScrolling = true;
+		clearTimeout(scrollTimeout);
+		scrollTimeout = setTimeout(() => isScrolling = false, 150);
+	}, { passive: true });
 }
 
 function initPageScripts() {
-    const countdownContainer = document.getElementById("countdown");
-    if (countdownContainer) {
-        if (window.countdownInterval) clearInterval(window.countdownInterval);
-        const weddingDate = new Date("February 23, 2026 00:00:00").getTime();
-        window.countdownInterval = setInterval(() => {
-            const now = new Date().getTime();
-            const distance = weddingDate - now;
-            if (distance < 0) {
-                clearInterval(window.countdownInterval);
-                countdownContainer.innerHTML = "<div class='text-xl font-bold'>¡Es hoy!</div>";
-                return;
-            }
-            const d = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const s = Math.floor((distance % (1000 * 60)) / 1000);
-            if (document.getElementById("days")) document.getElementById("days").innerText = String(d).padStart(2, '0');
-            if (document.getElementById("hours")) document.getElementById("hours").innerText = String(h).padStart(2, '0');
-            if (document.getElementById("minutes")) document.getElementById("minutes").innerText = String(m).padStart(2, '0');
-            if (document.getElementById("seconds")) document.getElementById("seconds").innerText = String(s).padStart(2, '0');
-        }, 1000);
-    }
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible', 'opacity-100', 'translate-y-0');
-                entry.target.classList.remove('opacity-0', 'translate-y-10');
-            }
-        });
-    }, { threshold: 0.15 });
-    document.querySelectorAll('.reveal-on-scroll').forEach(section => observer.observe(section));
+	// Countdown
+	const countdownContainer = document.getElementById("countdown");
+	if (countdownContainer) {
+		if (window.countdownInterval) clearInterval(window.countdownInterval);
+		const weddingDate = new Date("February 23, 2026 00:00:00").getTime();
+		window.countdownInterval = setInterval(() => {
+			const now = new Date().getTime();
+			const distance = weddingDate - now;
+			if (distance < 0) {
+				clearInterval(window.countdownInterval);
+				countdownContainer.innerHTML = "<div class='text-xl font-bold'>¡Es hoy!</div>";
+				return;
+			}
+			const d = Math.floor(distance / (1000 * 60 * 60 * 24));
+			const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+			const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+			const s = Math.floor((distance % (1000 * 60)) / 1000);
+			if (document.getElementById("days")) document.getElementById("days").innerText = String(d).padStart(2, '0');
+			if (document.getElementById("hours")) document.getElementById("hours").innerText = String(h).padStart(2, '0');
+			if (document.getElementById("minutes")) document.getElementById("minutes").innerText = String(m).padStart(2, '0');
+			if (document.getElementById("seconds")) document.getElementById("seconds").innerText = String(s).padStart(2, '0');
+		}, 1000);
+	}
 
-    setupPhotoColorization();
-    setupCameraButtonIndicator();
-    document.removeEventListener('keydown', handleEscKey);
-    document.addEventListener('keydown', handleEscKey);
+	// Scroll Reveal
+	const observer = new IntersectionObserver((entries) => {
+		entries.forEach(entry => {
+			if (entry.isIntersecting) {
+				entry.target.classList.add('visible', 'opacity-100', 'translate-y-0');
+				entry.target.classList.remove('opacity-0', 'translate-y-10');
+			}
+		});
+	}, { threshold: 0.15 });
+	document.querySelectorAll('.reveal-on-scroll').forEach(section => observer.observe(section));
+
+	// Funcionalidades adicionales
+	setupPhotoColorization();
+	setupCameraButtonIndicator();
+
+	// Eventos Lightbox
+	document.removeEventListener('keydown', handleEscKey);
+	document.addEventListener('keydown', handleEscKey);
 }
 
+// ==========================================
+// 5. FUNCIONES UTILITARIAS (Lightbox, Color, etc)
+// ==========================================
 function setupPhotoColorization() {
-    const photos = document.querySelectorAll('.polaroid-container img');
-    const colorizeOnScroll = () => {
-        photos.forEach(img => {
-            const rect = img.getBoundingClientRect();
-            const elementCenter = rect.top + rect.height / 2;
-            const viewportCenter = window.innerHeight / 2;
-            const distance = Math.abs(elementCenter - viewportCenter);
-            const maxDistance = window.innerHeight / 2;
-            const proximity = Math.max(0, 1 - (distance / maxDistance));
-            const grayscale = Math.max(0, 1 - proximity);
-            img.style.filter = `grayscale(${grayscale})`;
-        });
-    };
-    window.addEventListener('scroll', colorizeOnScroll, { passive: true });
-    colorizeOnScroll();
+	const photos = document.querySelectorAll('.polaroid-container img');
+	const colorizeOnScroll = () => {
+		photos.forEach(img => {
+			const rect = img.getBoundingClientRect();
+			const elementCenter = rect.top + rect.height / 2;
+			const viewportCenter = window.innerHeight / 2;
+			const distance = Math.abs(elementCenter - viewportCenter);
+			const maxDistance = window.innerHeight / 2;
+			const proximity = Math.max(0, 1 - (distance / maxDistance));
+			const grayscale = Math.max(0, 1 - proximity);
+			img.style.filter = `grayscale(${grayscale})`;
+		});
+	};
+	window.addEventListener('scroll', colorizeOnScroll, { passive: true });
+	colorizeOnScroll();
 }
 
 function setupCameraButtonIndicator() {
-    const cameraBtn = document.querySelector('.floating-camera-btn');
-    if (!cameraBtn) return;
-    cameraBtn.classList.add('pulse-attention');
+	const cameraBtn = document.querySelector('.floating-camera-btn');
+	if (!cameraBtn) return;
+	cameraBtn.classList.add('pulse-attention');
 }
 
+// --- LIGHTBOX CORREGIDO Y ROBUSTO ---
+
 window.openLightbox = function (element) {
-    if (isScrolling) return;
-    const img = element.querySelector('img');
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
-    if (img && lightbox && lightboxImg) {
-        if (img.src.includes('bg-gray-100')) return;
-        lightboxImg.src = img.src;
-        lightbox.classList.remove('hidden');
-        setTimeout(() => lightboxImg.classList.add('scale-100'), 10);
-        document.body.style.overflow = 'hidden';
-    }
+	const img = element.querySelector('img');
+	const lightbox = document.getElementById('lightbox');
+	const lightboxImg = document.getElementById('lightbox-img');
+
+	if (!img || !lightbox || !lightboxImg) {
+		console.error("Elementos del Lightbox no encontrados");
+		return;
+	}
+
+	// Asignar la imagen (sin esperar a que cargue)
+	lightboxImg.src = img.src;
+
+	// Mostrar el lightbox (hidden -> flex)
+	lightbox.classList.remove('hidden');
+	lightbox.classList.add('flex');
+
+	// Pequeña pausa para asegurar reflow
+	setTimeout(() => {
+		lightbox.classList.remove('opacity-0');
+		lightboxImg.classList.remove('scale-95');
+		lightboxImg.classList.add('scale-100');
+	}, 10);
+
+	document.body.style.overflow = 'hidden';
 };
 
 window.closeLightbox = function () {
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
-    if (lightbox) {
-        lightboxImg?.classList.remove('scale-100');
-        setTimeout(() => lightbox.classList.add('hidden'), 200);
-        document.body.style.overflow = '';
-    }
+	const lightbox = document.getElementById('lightbox');
+	const lightboxImg = document.getElementById('lightbox-img');
+
+	if (lightbox) {
+		// Animación de salida
+		lightbox.classList.add('opacity-0');
+
+		if (lightboxImg) {
+			lightboxImg.classList.remove('scale-100');
+			lightboxImg.classList.add('scale-95');
+		}
+
+		// Esperar animación (300ms) y ocultar
+		setTimeout(() => {
+			lightbox.classList.remove('flex');
+			lightbox.classList.add('hidden');
+			document.body.style.overflow = '';
+
+			if (lightboxImg) lightboxImg.src = '';
+		}, 300);
+	}
 };
 
-function handleEscKey(event) { if (event.key === "Escape") window.closeLightbox(); }
-window.copiarAlPortapapeles = function (t, tipo, btn) {
-    navigator.clipboard.writeText(t).then(() => Swal.fire({ toast: true, position: 'top-end', icon: 'success', title: tipo + ' Copiado', timer: 2000, showConfirmButton: false }));
+
+window.copiarAlPortapapeles = function (texto, tipo, btnElement) {
+
+	const actualizarBoton = () => {
+
+		if (btnElement) {
+
+			const originalHTML = btnElement.innerHTML;
+
+			const originalClasses = btnElement.className;
+
+			btnElement.innerHTML = '<i class="fa-solid fa-check"></i> <span>¡Copiado!</span>';
+
+			btnElement.classList.remove('bg-black', 'bg-purple-600', 'hover:bg-gray-800', 'hover:bg-purple-700');
+
+			btnElement.classList.add('bg-green-600', 'hover:bg-green-700');
+
+			setTimeout(() => {
+
+				btnElement.innerHTML = originalHTML;
+
+				btnElement.className = originalClasses;
+
+			}, 2000);
+
+		}
+
+	};
+
+	if (navigator.clipboard && window.isSecureContext) {
+
+		navigator.clipboard.writeText(texto).then(() => {
+
+			actualizarBoton();
+
+			window.mostrarAlerta(tipo);
+
+		}).catch(() => window.copiarManual(texto, tipo, btnElement));
+
+	} else {
+
+		window.copiarManual(texto, tipo, btnElement);
+
+	}
+
 };
-window.openQrModal = function () { document.getElementById('qrModal')?.classList.remove('hidden'); };
-window.closeQrModal = function () { document.getElementById('qrModal')?.classList.add('hidden'); };
-window.abrirSubidaFotos = function () { window.open('https://photos.app.goo.gl/Uf4z7rpbS9b9SdpU8', '_blank'); };
+
+window.copiarManual = function (texto, tipo, btnElement) {
+
+	const textArea = document.createElement("textarea");
+
+	textArea.value = texto;
+
+	textArea.style.position = "fixed";
+
+	textArea.style.left = "-9999px";
+
+	document.body.appendChild(textArea);
+
+	textArea.focus();
+
+	textArea.select();
+
+	try {
+
+		document.execCommand('copy');
+
+		if (btnElement) {
+
+			const originalHTML = btnElement.innerHTML;
+
+			const originalClasses = btnElement.className;
+
+			btnElement.innerHTML = '<i class="fa-solid fa-check"></i> <span>¡Copiado!</span>';
+
+			btnElement.classList.remove('bg-black', 'bg-purple-600');
+
+			btnElement.classList.add('bg-green-600');
+
+			setTimeout(() => {
+
+				btnElement.innerHTML = originalHTML;
+
+				btnElement.className = originalClasses;
+
+			}, 2000);
+
+		}
+
+		window.mostrarAlerta(tipo);
+
+	} catch (err) { }
+
+	document.body.removeChild(textArea);
+
+};
+
+window.mostrarAlerta = function (tipo) {
+
+	const Toast = Swal.mixin({
+
+		toast: true, position: 'top-end', showConfirmButton: false, timer: 3000, timerProgressBar: true,
+
+		didOpen: (toast) => {
+
+			toast.addEventListener('mouseenter', Swal.stopTimer);
+
+			toast.addEventListener('mouseleave', Swal.resumeTimer);
+
+		}
+
+	});
+
+	Toast.fire({ icon: 'success', title: `${tipo} copiado` });
+
+};
+
+window.openQrModal = function () {
+
+	const modal = document.getElementById('qrModal');
+
+	const backdrop = document.getElementById('modalBackdrop');
+
+	const panel = document.getElementById('modalPanel');
+
+	if (!modal) return;
+
+	modal.classList.remove('hidden');
+
+	requestAnimationFrame(() => {
+
+		backdrop?.classList.remove('opacity-0');
+
+		panel?.classList.remove('scale-95', 'opacity-0');
+
+		panel?.classList.add('scale-100', 'opacity-100');
+
+	});
+
+};
+
+
+
+window.closeQrModal = function () {
+
+	const modal = document.getElementById('qrModal');
+
+	const backdrop = document.getElementById('modalBackdrop');
+
+	const panel = document.getElementById('modalPanel');
+
+	if (!modal) return;
+
+	backdrop?.classList.add('opacity-0');
+
+	panel?.classList.remove('scale-100', 'opacity-100');
+
+	panel?.classList.add('scale-95', 'opacity-0');
+
+	setTimeout(() => { modal.classList.add('hidden'); }, 300);
+
+};
+
+
+
+window.abrirSubidaFotos = function () {
+
+	Swal.fire({
+
+		title: '¡Sé nuestro Paparazzi!',
+
+		text: 'Sube aquí tus mejores capturas.',
+
+		icon: 'camera',
+
+		confirmButtonText: 'Subir Fotos',
+
+		confirmButtonColor: '#000',
+
+		showCancelButton: true,
+
+		cancelButtonText: 'Cerrar'
+
+	}).then((result) => {
+
+		if (result.isConfirmed) window.open('https://photos.app.goo.gl/Uf4z7rpbS9b9SdpU8', '_blank');
+
+	});
+
+};
+
+// Aseguramos que la tecla ESC cierre la foto
+function handleEscKey(event) {
+	const lightbox = document.getElementById('lightbox');
+	// Solo cerramos si el lightbox NO tiene la clase hidden
+	if (event.key === "Escape" && lightbox && !lightbox.classList.contains('hidden')) {
+		window.closeLightbox();
+	}
+}

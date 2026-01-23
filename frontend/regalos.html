@@ -79,6 +79,7 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 items-stretch">
 
                 <!-- TARJETA 1: BCP -->
+                <!-- TARJETA 1: BCP -->
                 <div
                     class="gift-card bg-white p-6 lg:p-8 rounded-xl shadow-sm text-center relative group reveal-on-scroll h-full">
 
@@ -91,10 +92,14 @@
                         <h3 class="mt-4 font-title text-xl font-semibold mb-1">Depósito Bancario</h3>
                         <p class="text-xs text-gray-500 uppercase tracking-widest mb-6">Cuenta BCP Ahorros</p>
 
+                        <!-- Número de Cuenta -->
                         <div class="bg-gray-50 p-4 rounded-lg border border-gray-100 mb-6 break-words">
-                            <p class="font-mono text-lg font-bold text-gray-800 tracking-wider select-all mb-2"
-                                id="text-bcp">
+                            <p class="font-body text-xs text-gray-500 uppercase mb-2">Número de Cuenta:</p>
+                            <p class="font-mono text-lg font-bold text-gray-800 tracking-wider select-all mb-2">
                                 57094853271037
+                            </p>
+                            <p class="font-mono font-bold text-gray-800 tracking-wider select-all mb-2" style="font-size: 13px;">
+                                00257019485327103702
                             </p>
                             <div class="w-full h-px bg-gray-200 my-2"></div>
                             <p class="font-body text-xs text-gray-500 uppercase">Titular:</p>
@@ -104,10 +109,16 @@
                         </div>
                     </div>
 
-                    <button onclick="copiarAlPortapapeles('57094853271037', 'Cuenta BCP', this)"
-                        class="copy-btn w-full bg-black text-white py-3 text-xs uppercase font-bold tracking-widest hover:bg-gray-800 rounded transition duration-300 flex items-center justify-center gap-2 mt-auto">
-                        <i class="fa-regular fa-copy"></i> <span>Copiar Cuenta</span>
-                    </button>
+                    <div class="space-y-3">
+                        <button onclick="copiarAlPortapapeles('57094853271037', 'Cuenta BCP', this)"
+                            class="copy-btn w-full bg-black text-white py-3 text-xs uppercase font-bold tracking-widest hover:bg-gray-800 rounded transition duration-300 flex items-center justify-center gap-2">
+                            <i class="fa-regular fa-copy"></i> <span>Copiar Nro Cuenta</span>
+                        </button>
+                        <button onclick="copiarAlPortapapeles('00257019485327103702', 'Codigo Interbancario', this)"
+                            class="copy-btn w-full bg-black text-white py-3 text-xs uppercase font-bold tracking-widest hover:bg-gray-800 rounded transition duration-300 flex items-center justify-center gap-2">
+                            <i class="fa-regular fa-copy"></i> <span>Copiar CCI</span>
+                        </button>
+                    </div>
                 </div>
 
                 <!-- TARJETA 2: YAPE / PLIN -->
@@ -115,7 +126,7 @@
                 <div class="gift-card bg-white p-6 lg:p-8 rounded-xl shadow-sm text-center relative group reveal-on-scroll h-full"
                     style="transition-delay: 100ms;">
                     <div
-                        class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-purple-600 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg z-10">
+                        class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2  bg-gray-800 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg z-10">
                         <i class="fa-solid fa-mobile-screen text-lg"></i>
                     </div>
 
@@ -127,7 +138,7 @@
                         <div onclick="openQrModal()"
                             class="cursor-pointer w-32 h-32 mx-auto bg-white rounded-lg mb-4 flex items-center justify-center relative overflow-hidden group-hover:scale-105 transition-transform duration-300 border border-gray-100 ring-2 ring-transparent hover:ring-purple-200"
                             title="Clic para ampliar">
-                            <img src="img/codigoQrYape.png" onerror="this.src='img/codigoQrYape.jpg'" alt="QR Yape"
+                            <img src="img/codigoQrYape.jpg" onerror="this.src='img/codigoQrYape.jpg'" alt="QR Yape"
                                 class="w-full h-full object-contain p-1 pointer-events-none">
                             <div
                                 class="absolute bottom-1 right-1 bg-white rounded-full p-1 shadow-sm opacity-0 group-hover:opacity-100 transition-opacity">
@@ -142,7 +153,7 @@
                     </div>
 
                     <button onclick="copiarAlPortapapeles('924120366', 'Número de Celular', this)"
-                        class="copy-btn w-full bg-purple-600 text-white py-3 text-xs uppercase font-bold tracking-widest hover:bg-purple-700 rounded transition duration-300 flex items-center justify-center gap-2 mt-auto">
+                        class="copy-btn w-full bg-gray-800 text-white py-3 text-xs uppercase font-bold tracking-widest hover:bg-purple-700 rounded transition duration-300 flex items-center justify-center gap-2 mt-auto">
                         <i class="fa-regular fa-copy"></i> <span>Copiar Número</span>
                     </button>
                 </div>
@@ -227,7 +238,7 @@
 
                             <div
                                 class="w-64 h-64 mx-auto border-4 border-double border-purple-100 rounded-lg p-2 mb-4 relative bg-white shadow-inner">
-                                <img src="img/codigoQrYape.png" onerror="this.src='img/codigoQrYape.jpg'"
+                                <img src="img/codigoQrYape.jpg" onerror="this.src='img/codigoQrYape.jpg'"
                                     alt="QR Yape Grande" class="w-full h-full object-contain">
                                 <!-- Corazón decorativo animado -->
                                 <div class="absolute -top-3 -right-3 bg-white rounded-full p-1 shadow-md">

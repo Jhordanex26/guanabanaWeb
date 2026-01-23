@@ -95,7 +95,7 @@
                     <div class="absolute inset-0 flex items-center justify-center z-0 pb-10">
                         <i class="fa-solid fa-circle-notch fa-spin text-3xl text-gray-300"></i>
                     </div>
-                    <img src="img/img13.JPG" alt="Viajes"
+                    <img src="img/img13.jpg" alt="Viajes"
                         class="relative z-10 opacity-0 transition-opacity duration-700 w-full"
                         onload="this.classList.remove('opacity-0')" loading="eager">
                     <div class="polaroid-caption">Un Lugar Especial</div>
@@ -282,15 +282,19 @@
     </footer>
 
     <!-- LIGHTBOX MODAL -->
-    <div id="lightbox" class="fixed inset-0 z-[100] bg-black/90 flex items-center justify-center p-4 backdrop-blur-sm"
+    <div id="lightbox"
+        class="hidden fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-4 backdrop-blur-sm transition-opacity duration-300 opacity-0"
         onclick="closeLightbox()">
+
         <button
-            class="absolute top-4 right-4 text-white text-4xl hover:text-gray-300 transition focus:outline-none">&times;</button>
+            class="absolute top-4 right-4 text-white/80 hover:text-white text-5xl transition focus:outline-none z-[110]"
+            onclick="closeLightbox()">&times;</button>
+
         <img id="lightbox-img" src="" alt="Vista Previa"
-            class="max-h-full max-w-full rounded-sm transform scale-95 transition-transform duration-300"
+            class="max-h-[90vh] max-w-full rounded shadow-2xl transform scale-95 transition-transform duration-300"
             onclick="event.stopPropagation()">
     </div>
-    <!-- Enlace al JS Externo -->
+
     <script src="app.js"></script>
 
 </body>

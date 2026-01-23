@@ -271,8 +271,9 @@ html {
 }
 
 /* =========================================
-   6. LIGHTBOX (VISOR)
+   6. LIGHTBOX (VISOR) - CORREGIDO
    ========================================= */
+
 #lightbox {
   opacity: 0;
   pointer-events: none;
@@ -280,9 +281,19 @@ html {
   backdrop-filter: blur(4px);
 }
 
-#lightbox.active {
+/* Cuando se abre el lightbox con estas clases */
+#lightbox.flex {
+  display: flex !important;
+  pointer-events: auto;
+}
+
+#lightbox.flex:not(.opacity-0) {
   opacity: 1;
-  pointer-events: all;
+}
+
+#lightbox.hidden {
+  display: none !important;
+  pointer-events: none;
 }
 
 #lightbox img {
@@ -291,10 +302,22 @@ html {
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
   border: 8px solid white;
   transition: transform 0.3s ease;
+  border-radius: 8px;
+}
+
+#lightbox img.scale-95 {
+  transform: scale(0.95);
+}
+
+#lightbox img.scale-100 {
+  transform: scale(1);
 }
 
 #lightbox button {
   transition: all 0.2s ease;
+  background: transparent;
+  border: none;
+  cursor: pointer;
 }
 
 #lightbox button:hover {
@@ -417,79 +440,94 @@ html {
 
 /* Animación del Disco */
 @keyframes spin-slow {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
+
 .animate-spin-slow {
-    animation: spin-slow 8s linear infinite;
+  animation: spin-slow 8s linear infinite;
 }
+
 .paused-animation {
-    animation-play-state: paused;
+  animation-play-state: paused;
 }
 
 /* Estilos del Reproductor */
 #mini-player {
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Barra de progreso */
 input[type=range].custom-range {
-    -webkit-appearance: none;
-    background: transparent;
+  -webkit-appearance: none;
+  background: transparent;
 }
+
 input[type=range].custom-range::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    height: 12px;
-    width: 12px;
-    border-radius: 50%;
-    background: #fff;
-    margin-top: -4px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  -webkit-appearance: none;
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  background: #fff;
+  margin-top: -4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
+
 input[type=range].custom-range::-webkit-slider-runnable-track {
-    width: 100%;
-    height: 4px;
-    cursor: pointer;
-    background: rgba(255,255,255,0.3);
-    border-radius: 2px;
+  width: 100%;
+  height: 4px;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
 }
+
 /* AGREGA ESTO AL FINAL DE TU STYLES.CSS */
 
 /* Efecto de entrada (Slide Up) */
 .player-hidden-start {
-    transform: translateY(150%);
-    opacity: 0;
+  transform: translateY(150%);
+  opacity: 0;
 }
+
 .player-visible-start {
-    transform: translateY(0);
-    opacity: 1;
+  transform: translateY(0);
+  opacity: 1;
 }
 
 /* Transiciones del modo cápsula */
 #mini-player {
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    max-width: 3.5rem; /* Ancho inicial (solo el disco) */
-    overflow: hidden;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  max-width: 3.5rem;
+  /* Ancho inicial (solo el disco) */
+  overflow: hidden;
 }
 
 /* Cuando tiene la clase 'expanded', crece */
 #mini-player.expanded {
-    max-width: 400px; /* Ancho suficiente para texto y botones */
-    padding-right: 1.5rem; /* Espacio extra al final */
+  max-width: 400px;
+  /* Ancho suficiente para texto y botones */
+  padding-right: 1.5rem;
+  /* Espacio extra al final */
 }
 
 /* Ocultar contenido cuando está cerrado */
 .player-content-hidden {
-    opacity: 0;
-    pointer-events: none;
-    width: 0;
-    margin: 0;
+  opacity: 0;
+  pointer-events: none;
+  width: 0;
+  margin: 0;
 }
 
 /* Mostrar contenido cuando está abierto */
 .player-content-visible {
-    opacity: 1;
-    pointer-events: auto;
-    width: auto;
-    margin-left: 0.75rem; /* gap-3 eq */
+  opacity: 1;
+  pointer-events: auto;
+  width: auto;
+  margin-left: 0.75rem;
+  /* gap-3 eq */
 }
