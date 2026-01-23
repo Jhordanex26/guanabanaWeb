@@ -1,0 +1,25 @@
+{
+    "version": 2,
+    "rewrites": [
+        {
+            "source": "/",
+            "destination": "/frontend/index.html"
+        },
+        {
+            "source": "/nuestraHistoria",
+            "destination": "/frontend/nuestraHistoria.html"
+        },
+        {
+            "source": "/ubicacion",
+            "destination": "/frontend/ubicacion.html"
+        },
+        {
+            "source": "/regalos",
+            "destination": "/frontend/regalos.html"
+        },
+        {
+            "source": "/(.*)",
+            "destination": "/frontend/$1"
+        }
+    ]
+}
