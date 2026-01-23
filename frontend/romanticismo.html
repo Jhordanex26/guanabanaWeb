@@ -230,30 +230,46 @@
     </section>
 
     <!-- COUNTDOWN SECTION -->
-    <section class="py-16 bg-white border-t border-gray-100 reveal-on-scroll mb-20">
-        <div class="container mx-auto px-4 text-center">
-            <h3 class="font-title text-2xl text-gray-800 mb-8 uppercase tracking-widest">Faltan</h3>
+    <section class="border-t border-gray-100" style="padding-top: 4rem; margin-bottom:4rem">
+        <div class="container mx-auto px-4">
+            <div class="text-center">
+                <h3 class="font-title text-2xl text-gray-800 mb-8 uppercase tracking-widest">Faltan</h3>
 
-            <div class="flex flex-wrap justify-center gap-6 md:gap-12 text-gray-800" id="countdown">
-                <!-- Los JS llenarán esto -->
-                <div class="flex flex-col items-center">
-                    <span class="text-4xl md:text-5xl font-body font-light" id="days">00</span>
-                    <span class="text-[10px] uppercase tracking-widest text-gray-400 mt-2">Días</span>
+                <!-- Contador -->
+                <div class="flex flex-wrap justify-center items-center gap-4 md:gap-12 text-gray-800 mb-8"
+                    id="countdown">
+                    <div class="flex flex-col items-center">
+                        <span class="text-4xl md:text-5xl font-light" id="days">00</span>
+                        <span class="text-[10px] uppercase tracking-widest text-gray-400 mt-2">Días</span>
+                    </div>
+
+                    <div class="text-2xl font-light text-gray-200">:</div>
+
+                    <div class="flex flex-col items-center">
+                        <span class="text-4xl md:text-5xl font-light" id="hours">00</span>
+                        <span class="text-[10px] uppercase tracking-widest text-gray-400 mt-2">Horas</span>
+                    </div>
+
+                    <div class="text-2xl font-light text-gray-200">:</div>
+
+                    <div class="flex flex-col items-center">
+                        <span class="text-4xl md:text-5xl font-light" id="minutes">00</span>
+                        <span class="text-[10px] uppercase tracking-widest text-gray-400 mt-2">Min</span>
+                    </div>
+
+                    <div class="text-2xl font-light text-gray-200">:</div>
+
+                    <div class="flex flex-col items-center">
+                        <span class="text-4xl md:text-5xl font-light" id="seconds">00</span>
+                        <span class="text-[10px] uppercase tracking-widest text-gray-400 mt-2">Seg</span>
+                    </div>
                 </div>
-                <div class="text-3xl font-light text-gray-200 self-center">:</div>
-                <div class="flex flex-col items-center">
-                    <span class="text-4xl md:text-5xl font-body font-light" id="hours">00</span>
-                    <span class="text-[10px] uppercase tracking-widest text-gray-400 mt-2">Horas</span>
-                </div>
-                <div class="text-3xl font-light text-gray-200 self-center">:</div>
-                <div class="flex flex-col items-center">
-                    <span class="text-4xl md:text-5xl font-body font-light" id="minutes">00</span>
-                    <span class="text-[10px] uppercase tracking-widest text-gray-400 mt-2">Min</span>
-                </div>
-                <div class="text-3xl font-light text-gray-200 self-center hidden md:block">:</div>
-                <div class="flex flex-col items-center hidden md:flex">
-                    <span class="text-4xl md:text-5xl font-body font-light" id="seconds">00</span>
-                    <span class="text-[10px] uppercase tracking-widest text-gray-400 mt-2">Seg</span>
+
+                <!-- Video centrado debajo del contador -->
+                <div class="pet-video-wrapper visible">
+                    <video autoplay loop muted playsinline class="pet-video">
+                        <source src="img/perryVideo.mp4" type="video/mp4">
+                    </video>
                 </div>
             </div>
         </div>
@@ -274,11 +290,14 @@
     </div>
 
     <!-- FOOTER -->
-    <footer class="bg-black text-white py-8 text-center mt-auto">
+    <footer class="bg-black text-white text-center mt-auto" style="padding-top:4rem ;padding-bottom: 4rem;">
         <p class="font-title text-sm tracking-widest">Saint & Diana</p>
         <p class="text-[10px] text-gray-500 mt-2">23 . 02 . 2026</p>
-        <p class="text-[8px] mt-8">Diseñado con <i class="fa-solid fa-heart text-xs mx-1"></i> por
-            Jhordanex 🐼</p>
+        <a href="https://www.linkedin.com/in/jhordan-sanchez-700181185/ ">
+            <p class="text-[10px] text-dark-500 mb-6 mt-8">Diseñado con <i class="fa-solid fa-heart text-xs mx-1"></i>
+                por
+                Jhordanex 🐼</p>
+        </a>
     </footer>
 
     <!-- LIGHTBOX MODAL -->

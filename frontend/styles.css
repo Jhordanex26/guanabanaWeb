@@ -531,3 +531,64 @@ input[type=range].custom-range::-webkit-slider-runnable-track {
   margin-left: 0.75rem;
   /* gap-3 eq */
 }
+
+/* 1. Definición de la Animación */
+@keyframes perryArrival {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.5);
+  }
+
+  70% {
+    transform: translateY(-5px) scale(1.1);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* 2. Estilos del Wrapper (Contenedor) */
+.pet-video-wrapper {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  opacity: 0;
+}
+
+.pet-video-wrapper.visible {
+  animation: perryArrival 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+/* Tamaños responsive */
+.pet-video-wrapper {
+  width: 55px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (min-width: 768px) {
+  .pet-video-wrapper {
+    width: 85px;
+    margin-top: 2.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .pet-video-wrapper {
+    width: 110px;
+    margin-top: 3rem;
+  }
+}
+
+/* 3. Estilos del Video */
+.pet-video {
+  width: 100%;
+  height: auto;
+  display: block;
+  background-color: #F9FAFB;
+  mix-blend-mode: multiply;
+}
